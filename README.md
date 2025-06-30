@@ -44,9 +44,11 @@
 
 > *Replace the placeholders with real screenshots stored in `docs/images/`.*
 
-|             Main Window             |               Pre-processing Pipeline               |
+|             Main Window             |               Pipeline               |
 | :---------------------------------: | :-------------------------------------------------: |
-| ![Main UI](docs/images/main_ui.png) | ![Preprocess Flow](docs/images/preprocess_flow.png) |
+|![image](https://github.com/user-attachments/assets/b8639d31-b265-4200-8c27-c935ab65daed)
+| (https://github.com/user-attachments/assets/0e819ef5-3819-43ba-987c-0b36abe8f739)
+ |
 
 ---
 
@@ -263,7 +265,7 @@ python main.py --workflow examples/pca_svm.yml
 
 |               主界面               |                   预处理流程                   |
 | :-----------------------------: | :---------------------------------------: |
-| ![主界面](docs/images/main_ui.png) | ![预处理流程](docs/images/preprocess_flow.png) |
+| 如英文区 |
 
 ---
 
