@@ -42,7 +42,6 @@
 
 ## UI Overview
 
-> *Replace the placeholders with real screenshots stored in `docs/images/`.*
 
 |             Main Window             |               Pipeline               |
 | :---------------------------------: | :-------------------------------------------------: |
@@ -162,7 +161,7 @@ All versions satisfy SpectroEase’s compatibility requirements; newer versions 
 ### 1 · Clone the Repo & Install Dependencies
 
 ```powershell
-git clone https://github.com/your-username/SpectroEase.git
+git clone [https://github.com/shudayi/SpectroEase-V1.0]
 cd SpectroEase
 pip install -r requirements.txt      # exact versions are pinned
 ```
@@ -261,7 +260,7 @@ python main.py --workflow examples/pca_svm.yml
 
 ## 界面概览
 
-> *请将实际截图放至 `docs/images/` 目录，并替换下方链接*
+
 
 |               主界面               |                   预处理流程                   |
 | :-----------------------------: | :---------------------------------------: |
@@ -379,7 +378,7 @@ Grid Search · Random Search · Genetic Algorithm
 ### 1 · 克隆源码并安装依赖
 
 ```powershell
-git clone https://github.com/your-username/SpectroEase.git
+git clone https://github.com/shudayi/SpectroEase-V1.0
 cd SpectroEase
 pip install -r requirements.txt   # 已固定精确版本
 ```
