@@ -4,7 +4,7 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/)
 
 > **SpectroEase** is an open-source, extensible desktop application.
-> It converts the entire pipeline—**data loading / splitting → preprocessing → feature selection → modelling (with hyper-parameter optimisation) → evaluation → reporting**—into a drag-and-drop visual workflow, enabling scientists and engineers to perform qualitative or quantitative spectral analysis with zero coding.
+> It converts the entire pipeline—**data loading /partitioning → preprocessing → feature selection → modelling (with hyper-parameter optimization) → evaluation → reporting**—into a drag-and-drop visual workflow, enabling scientists and engineers to perform qualitative or quantitative spectral analysis with zero coding.
 
 ---
 
@@ -20,8 +20,7 @@
 7. [Installation & Quick Start](#installation--quick-start)
 8. [Data Format](#data-format)
 9. [Performance Notes](#performance-notes)
-10. [Citation](#citation)
-11. [Licence & Disclaimer](#licence--disclaimer)
+10. [Licence & Disclaimer](#licence--disclaimer)
 
 </details>
 
@@ -33,7 +32,7 @@
 * **Advanced preprocessing** — baseline correction, smoothing, scatter correction, normalisation, derivatives, peak alignment
 * **Feature selection** — SelectKBest, RFE, LASSO, PCA, PLSR, wavelets, automatic peak detection
 * **Modelling** — 30 + built-in classifiers, regressors and clustering models
-* **Hyper-parameter optimisation** — grid search / random search / genetic algorithm
+* **Hyper-parameter optimization** — grid search / random search / genetic algorithm
 * **Visual evaluation** — ROC curves, confusion matrices, feature-importance plots, residual plots
 * **Plugin architecture** — core steps are modular and easy to extend
 * **Guided UI** — wizard-style workflow plus parameter panels for a gentle learning curve
@@ -53,7 +52,7 @@
 
 ## System Architecture
 
-SpectroEase adopts a **modular plugin architecture** with clear separation of concerns:
+SpectroEase adopts a **modular architecture** with clear separation of concerns:
 
 ```text
 SpectroEase/
@@ -117,7 +116,7 @@ Logistic Regression · LDA / QDA · SVM · KNN · Decision Tree · Random Forest
 
 MLR · PLSR · SVR · Decision Tree Regression · Random Forest Regression · GPR · Ridge · Lasso · ElasticNet
 
-### 5 · Hyper-parameter Optimisation
+### 5 · Hyper-parameter optimization
 
 Grid Search · Random Search · Genetic Algorithm
 
