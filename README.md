@@ -43,9 +43,11 @@
 ## UI Overview
 
 
-|             Main Window             |               Pipeline               |
-| :---------------------------------: | :-------------------------------------------------: |
+|             Main Window             | 
+| :---------------------------------: | 
 |![image](https://github.com/user-attachments/assets/b8639d31-b265-4200-8c27-c935ab65daed)
+|            Pipeline                 | 
+| :---------------------------------: | 
 | ![image](https://github.com/user-attachments/assets/0e819ef5-3819-43ba-987c-0b36abe8f739)
 
 ---
