@@ -53,23 +53,23 @@
 
 ```text
 SpectroEase/
-├── app/                    # Main application
-│   ├── main.py             # Application entry point
-│   ├── gui/                # User interface components
-│   ├── core/               # Core business logic
-│   └── utils/              # Utility functions
-├── plugins/                # Plugin modules
-│   ├── preprocessing/      # Pre-processing plugins
-│   ├── feature_selection/  # Feature-selection plugins
-│   ├── modeling/           # Machine-learning plugins
-│   └── data_partition/     # Data-partitioning plugins
-├── interfaces/             # Plugin interfaces
+├── app/                    
+│   ├── main.py             
+│   ├── gui/                
+│   ├── core/               
+│   └── utils/             
+├── plugins/               
+│   ├── preprocessing/    
+│   ├── feature_selection/ 
+│   ├── modeling/         
+│   └── data_partition/     
+├── interfaces/         
 │   ├── base_plugin.py
 │   ├── preprocessing_interface.py
 │   ├── feature_selection_interface.py
 │   ├── modeling_interface.py
 │   └── data_partition_interface.py
-└── config/                 # Configuration files
+└── config/                
 ```
 
 ---
@@ -266,23 +266,23 @@ python main.py                       # start the GUI
 
 ```text
 SpectroEase/
-├── app/                    # 主程序
-│   ├── main.py             # 入口脚本
-│   ├── gui/                # UI 组件
-│   ├── core/               # 核心业务逻辑
-│   └── utils/              # 工具函数
-├── plugins/                # 插件
-│   ├── preprocessing/      # 预处理插件
-│   ├── feature_selection/  # 特征选择插件
-│   ├── modeling/           # 机器学习插件
-│   └── data_partition/     # 数据分割插件
-├── interfaces/             # 插件接口定义
+├── app/                    
+│   ├── main.py             
+│   ├── gui/                
+│   ├── core/               
+│   └── utils/              
+├── plugins/               
+│   ├── preprocessing/     
+│   ├── feature_selection/  
+│   ├── modeling/         
+│   └── data_partition/    
+├── interfaces/            
 │   ├── base_plugin.py
 │   ├── preprocessing_interface.py
 │   ├── feature_selection_interface.py
 │   ├── modeling_interface.py
 │   └── data_partition_interface.py
-└── config/                 # 配置文件
+└── config/               
 ```
 
 
