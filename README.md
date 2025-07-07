@@ -28,15 +28,13 @@
 
 ## Key Features
 
-* **Multi-format import** — CSV / TXT / Excel with automatic label detection & validation
-* **Advanced preprocessing** — baseline correction, smoothing, scatter correction, normalisation, derivatives, peak alignment
-* **Feature selection** — SelectKBest, RFE, LASSO, PCA, PLSR, wavelets, automatic peak detection
-* **Modelling** — 30 + built-in classifiers, regressors and clustering models
-* **Hyper-parameter optimization** — grid search / random search / genetic algorithm
-* **Visual evaluation** — ROC curves, confusion matrices, feature-importance plots, residual plots
-* **Plugin architecture** — core steps are modular and easy to extend
-* **Guided UI** — wizard-style workflow plus parameter panels for a gentle learning curve
-
+**​​Multi-format Data Import**​​​​: CSV (optimal performance) / TXT / Excel formats with automated label recognition and data validation
+**​​​​Advanced Preprocessing**​​​​: Baseline correction, smoothing, scatter correction, normalization, derivative transformation, peak alignment, and other mainstream preprocessing techniques
+**​​​​Feature Selection**​​​​: Principal Component Analysis (PCA), Partial Least Squares Regression (PLSR), wavelet transform, automated peak identification, and established feature selection methodologies
+**​​​​Modeling**​​​​: Native support for >15 qualitative and quantitative chemometric algorithms
+**​​​​Hyper-parameter Optimization**​​​​: Grid search / Random search / Genetic algorithm optimization strategies
+**​​​​Visual Diagnostic Evaluation**​​​​: ROC curves, confusion matrices, feature importance metrics, regression residual analysis with associated quantitative metrics and graphical representations
+**​​​​Workflow Interface Design​​**​​: Hierarchical workflow architecture with parametric control panels to reduce learning thresholds
 ---
 
 ## UI Overview
@@ -52,7 +50,6 @@
 
 ## System Architecture
 
-SpectroEase adopts a **modular architecture** with clear separation of concerns:
 
 ```text
 SpectroEase/
@@ -74,8 +71,6 @@ SpectroEase/
 │   └── data_partition_interface.py
 └── config/                 # Configuration files
 ```
-
-This layout lets you drop new plugins into the relevant folder with minimal boilerplate—every plugin implements one of the interfaces in `interfaces/`, ensuring compatibility with the main GUI.
 
 ---
 
@@ -101,9 +96,6 @@ This layout lets you drop new plugins into the relevant folder with minimal boil
 
 ### 3 · Feature Selection
 
-* SelectKBest *(f\_classif · mutual\_info\_classif · χ²)*
-* Recursive Feature Elimination (RFE)
-* LASSO · Mutual Information · Feature Importance
 * PCA · PLSR · Automatic Peak Detection · Wavelet Transform
 
 ### 4 · Modelling
@@ -169,8 +161,6 @@ pip install -r requirements.txt      # exact versions are pinned
 
 ```powershell
 python main.py                       # start the GUI
-# or run a batch-workflow example
-python main.py --workflow examples/pca_svm.yml
 ```
 
 ### 3 · Typical Workflow
@@ -188,6 +178,13 @@ python main.py --workflow examples/pca_svm.yml
 | **Recommended layout** | Row-wise: `Sample_ID, Label, 400 nm, 402 nm, …` |
 | **Label keywords**     | `category · class · label · variety · target`   |
 | **Demo dataset**       | `datasets/seed_demo/` (CC-BY-4.0)               |
+
+![image](https://github.com/user-attachments/assets/de2a0556-5729-48fc-b10f-c6efb85da488)
+
+
+
+
+
 
 ---
 
@@ -220,15 +217,15 @@ python main.py --workflow examples/pca_svm.yml
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.txt) 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/)
 
-> **SpectroEase** 是一款开源、可扩展的桌面应用程序。
-> 它将 **数据载入/分割 → 预处理 → 特征选择 → 建模（含超参数优化） → 评估 → 报告** 封装为拖拽式工作流，帮助科研人员和工程师零代码完成光谱定性/定量分析。
+> **SpectroEase** 是一款开源、可扩展的可视化应用程序。
+> 它将光谱分析环节全部流程： **数据载入/分割 → 预处理 → 特征选择 → 建模（含超参数优化） → 评估 → 报告** 封装为可视模块化工作流，帮助科研人员和工程师零代码完成光谱定性/定量分析。
 
 ---
 
 <details>
 <summary><strong>目录（点击展开）</strong></summary>
 
-1. [关键特性](#关键特性)
+1. [技术特点](#技术特点)
 2. [界面概览](#界面概览)
 3. [系统架构](#系统架构)
 4. [完整算法清单](#完整算法清单)
@@ -237,8 +234,7 @@ python main.py --workflow examples/pca_svm.yml
 7. [安装与快速上手](#安装与快速上手)
 8. [数据格式说明](#数据格式说明)
 9. [性能优化](#性能优化)
-10. [引用方式](#引用方式)
-11. [许可证与免责声明](#许可证与免责声明)
+10. [许可证与免责声明](#许可证与免责声明)
 
 </details>
 
@@ -246,14 +242,13 @@ python main.py --workflow examples/pca_svm.yml
 
 ## 关键特性
 
-* **多格式导入**：CSV / TXT / Excel，自动标签识别与数据校验
-* **高级预处理**：基线校正、平滑、散射校正、归一化、导数、波峰对齐
-* **特征选择**：SelectKBest、RFE、LASSO、PCA、PLSR、小波、自动峰检
-* **建模算法**：定性、定量两大类 30 + 模型内置支持
+* **多格式导入**：CSV / TXT / Excel，自动标签识别与数据校验，使用csv文件效果最佳
+* **高级预处理**：基线校正、平滑、散射校正、归一化、导数、波峰对齐等主流预处理方法
+* **特征选择**：PCA、PLSR、小波、自动峰检等主流特征选择方法
+* **建模算法**：内置定性、定量两大类超15种算法模型
 * **超参数优化**：网格搜索 / 随机搜索 / 遗传算法
-* **可视化评估**：ROC、混淆矩阵、特征重要性、回归残差等丰富图表
-* **插件架构**：核心功能插件化，便于二次开发
-* **界面模式**：向导式工作流 + 参数面板，降低上手门槛
+* **可视化评估**：ROC、混淆矩阵、特征重要性、回归残差等分析相关指标、图表
+* **界面模式**：从上到下工作流 + 参数面板，降低上手门槛
 
 ---
 
@@ -268,8 +263,6 @@ python main.py --workflow examples/pca_svm.yml
 ---
 
 ## 系统架构
-
-SpectroEase 采用 **模块化插件架构**，各功能职责分离：
 
 ```text
 SpectroEase/
@@ -292,7 +285,6 @@ SpectroEase/
 └── config/                 # 配置文件
 ```
 
-通过继承接口并放置于对应目录，即可快捷开发并加载新插件。
 
 ---
 
@@ -318,20 +310,17 @@ SpectroEase/
 
 ### 3 · 特征选择
 
-* SelectKBest *(f\_classif · mutual\_info\_classif · χ²)*
-* Recursive Feature Elimination (RFE)
-* LASSO · Mutual Information · Feature Importance
-* PCA · PLSR · 自动峰检 · Wavelet Transform
+* PCA · PLSR · 自动峰检 · Wavelet Transform 等
 
 ### 4 · 建模
 
 #### 4.1 定性分析
 
-Logistic Regression · LDA / QDA · SVM · KNN · Decision Tree · Random Forest · Gradient Boosting · XGBoost · Neural Network · K-Means · Hierarchical · DBSCAN
+Logistic Regression · LDA / QDA · SVM · KNN · Decision Tree · Random Forest · Gradient Boosting · XGBoost · Neural Network · K-Means · Hierarchical · DBSCAN 等
 
 #### 4.2 定量分析
 
-MLR · PLSR · SVR · Decision Tree Regression · Random Forest Regression · GPR · Ridge · Lasso · ElasticNet
+MLR · PLSR · SVR · Decision Tree Regression · Random Forest Regression · GPR · Ridge · Lasso · ElasticNet等
 
 ### 5 · 超参数优化
 
@@ -394,7 +383,7 @@ python main.py --workflow examples/pca_svm.yml
 
 1. **导入数据 / 分割** → 2. **选择预处理方法** → 3. **特征选择**
 2. **建模 / 超参优化** → 5. **评估可视化** → 6. **导出报告**
-
+| ![image](https://github.com/user-attachments/assets/0e819ef5-3819-43ba-987c-0b36abe8f739)
 ---
 
 ## 数据格式说明
@@ -404,7 +393,11 @@ python main.py --workflow examples/pca_svm.yml
 | **支持格式**  | CSV · TXT · Excel                           |
 | **推荐布局**  | 行式：`Sample_ID, Label, 400nm, 402nm, …`      |
 | **标签关键字** | category · class · label · variety · target |
-| **示例数据集** | `datasets/seed_demo/` (CC-BY-4.0)           |
+| **示例数据集** | `datasets/` (CC-BY-4.0)           |
+
+
+![image](https://github.com/user-attachments/assets/7c84d14b-e3d1-478e-a1b0-3117c9c72e4a)
+
 
 ---
 
