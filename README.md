@@ -160,6 +160,10 @@ The platform is written in **Python 3.11.9** and relies on the following librari
 
 ## Installation & Quick Start
 
+**⚠️ If the exe file download fails, please try these alternative links:**
+- **[GitHub Release](https://github.com/shudayi/SpectroEase-V1.0/releases/tag/v1.0.0)**
+- **[Google Drive Backup](https://drive.google.com/file/d/1AMFtOIimYQIzwiuXrtrno-7OxNDhqzXh/view?usp=drive_link)**
+
 ### 1 · Clone the Repo & Install Dependencies
 
 ```powershell
@@ -384,6 +388,10 @@ Grid Search · Random Search · Genetic Algorithm
 ---
 
 ## 安装与快速上手
+
+**⚠️ 如果exe文件下载失败，请尝试使用这些备用链接：**
+- **[GitHub Release](https://github.com/shudayi/SpectroEase-V1.0/releases/tag/v1.0.0)**
+- **[Google Drive 备份](https://drive.google.com/file/d/1AMFtOIimYQIzwiuXrtrno-7OxNDhqzXh/view?usp=drive_link)**
 
 ### 1 · 克隆源码并安装依赖
 
