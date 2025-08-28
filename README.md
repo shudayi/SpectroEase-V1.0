@@ -26,6 +26,12 @@
 
 ---
 
+**⚠️ If the exe file download fails, please try these alternative links:**
+- **[GitHub Release](https://github.com/shudayi/SpectroEase-V1.0/releases/tag/v1.0.0)**
+- **[Google Drive Backup](https://drive.google.com/file/d/1AMFtOIimYQIzwiuXrtrno-7OxNDhqzXh/view?usp=drive_link)**
+
+- 
+
 ## Key Features
 
 **​​Multi-format Data Import**​​​​: CSV (optimal performance) / TXT / Excel formats with automated label recognition and data validation
@@ -160,9 +166,7 @@ The platform is written in **Python 3.11.9** and relies on the following librari
 
 ## Installation & Quick Start
 
-**⚠️ If the exe file download fails, please try these alternative links:**
-- **[GitHub Release](https://github.com/shudayi/SpectroEase-V1.0/releases/tag/v1.0.0)**
-- **[Google Drive Backup](https://drive.google.com/file/d/1AMFtOIimYQIzwiuXrtrno-7OxNDhqzXh/view?usp=drive_link)**
+
 
 ### 1 · Clone the Repo & Install Dependencies
 
