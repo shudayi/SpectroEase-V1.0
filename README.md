@@ -30,7 +30,6 @@
 - **[GitHub Release](https://github.com/shudayi/SpectroEase-V1.0/releases/tag/v1.0.0)**
 - **[Google Drive Backup](https://drive.google.com/file/d/1AMFtOIimYQIzwiuXrtrno-7OxNDhqzXh/view?usp=drive_link)**
 
-- 
 
 ## Key Features
 
