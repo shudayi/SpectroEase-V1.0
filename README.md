@@ -233,7 +233,7 @@ Users must comply with local laws and regulations.
 [![Python 3.8+](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/)
 
 > **SpectroEase** 是一款开源、可扩展的可视化应用程序。
-> 它将光谱分析环节全部流程： **数据载入/分割 → 预处理 → 特征选择 → 建模（含超参数优化） → 评估 → 报告** 封装为可视模块化工作流，帮助科研人员和工程师零代码完成光谱定性/定量分析。
+> 它将光谱分析环节全部流程： **1.数据载入/分割   2.预处理   3.特征选择   4.建模（含超参数优化）  5.评估  6.报告** 打包为可视模块化工作流，帮助科研人员和工程师零代码完成光谱定性/定量分析。
 
 ---
 
@@ -393,10 +393,10 @@ Grid Search · Random Search · Genetic Algorithm
 为不熟悉代码的用户提供两种即开即用的软件包。
 
 #### 选项 A：单文件版 (Standalone)
-从 **[Google Drive 备份](https://drive.google.com/file/d/1BvLx0z0h46n3n_obOIHizyThG2UIJ_rh/view?usp=drive_link)** 下载 `SpectroEase.exe`。这是一个独立文件，无需安装，可直接运行。
+从 **[Google Drive 备份]([https://drive.google.com/file/d/1BvLx0z0h46n3n_obOIHizyThG2UIJ_rh/view?usp=drive_link](https://drive.google.com/file/d/10EBF0krNCyr6tQDBzn_Psdj1dyasO8Y-/view?usp=drive_link))** 下载 `SpectroEase.exe`。这是一个独立文件，无需安装，可直接运行。
 
 #### 选项 B：文件夹版 (Folder)
-从 **[GitHub Release](https://github.com/shudayi/SpectroEase-V1.0/releases/tag/v1.0.0)** 下载 `SpectroEase_folder.zip`。解压后运行其中的 `SpectroEase_folder.exe`。此版本启动速度可能更快。
+从 **[GitHub Release]([https://github.com/shudayi/SpectroEase-V1.0/releases/tag/v1.0.0](https://github.com/shudayi/SpectroEase-V1.0))** 下载 `EXE for SpectroEase`。解压后运行其中的 `SpectroEase.exe`。此版本启动速度可能更快。
 
 ### 方式二：为开发者（从源码运行）
 
@@ -416,9 +416,32 @@ python main.py                    # 打开 GUI
 
 ### 3 · 基础工作流
 
-1. **导入数据 / 分割** → 2. **选择预处理方法** → 3. **特征选择**
-4. **建模 / 超参优化** → 5. **评估可视化** → 6. **导出报告**
----
+1. **导入数据 / 分割**
+  
+  
+  
+2. **选择预处理方法**
+  
+
+
+
+3. **特征选择**
+
+
+
+
+4. **建模 / 超参优化**
+  
+  
+  
+5. **评估可视化**
+
+
+
+6. **导出报告**
+
+
+
 
 ## 数据格式说明
 
