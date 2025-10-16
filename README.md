@@ -174,7 +174,7 @@ Two pre-built packages are available for users who prefer not to work with sourc
 Download `SpectroEase.exe` from **[Google Drive](https://drive.google.com/file/d/1BvLx0z0h46n3n_obOIHizyThG2UIJ_rh/view?usp=drive_link)**. This single file runs directly with no installation.
 
 #### B. Folder Version
-Download `SpectroEase_folder.zip` from the **[GitHub Releases](https://github.com/shudayi/SpectroEase-V1.0/releases/tag/v1.0.0)** page. Unzip it and run `SpectroEase_folder.exe`. This version may start faster.
+Download `EXE for SpectroEase.zip` from the **[GitHub Releases](https://github.com/shudayi/SpectroEase-V1.0/releases/tag/v1.0.0)** page. Unzip it and run `SpectroEase.exe`. This version may start faster.
 
 ### Option 2: For Developers (from Source)
 
