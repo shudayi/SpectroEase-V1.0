@@ -256,7 +256,7 @@ python main.py                       # start the GUI
 [![Python 3.8+](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/)
 
 > **SpectroEase** 是一款开源、可扩展的可视化应用程序。
-> 它将光谱分析环节全部流程： **1.数据载入/分割   2.预处理   3.特征选择   4.建模（含超参数优化）  5.评估  6.报告** 打包为可视模块化工作流，帮助科研人员和工程师零代码完成光谱定性/定量分析。
+> 它将光谱分析环节全部流程：**1. 数据载入与划分  2. 预处理  3. 特征选择  4. 建模（含超参数优化）  5. 评估  6. 报告** 打包为可视模块化工作流，帮助科研人员和工程师零代码完成光谱定性/定量分析。
 
 ---
 
@@ -271,33 +271,31 @@ python main.py                       # start the GUI
 6. [依赖库](#依赖库)
 7. [安装与快速上手](#安装与快速上手)
 8. [数据格式说明](#数据格式说明)
-9. [性能优化](#性能优化)
-10. [许可证与免责声明](#许可证与免责声明)
+9. [数据校验与错误处理](#数据校验与错误处理)
+10. [性能优化](#性能优化)
+11. [许可证与免责声明](#许可证与免责声明)
 
 </details>
 
 ---
 
-## 关键特性
+## 技术特点
 
-* **多格式导入**：CSV / TXT / Excel，自动标签识别与数据校验，使用csv文件效果最佳
-* **预处理**：基线校正、平滑、散射校正、归一化、导数、波峰对齐等主流预处理方法
-* **特征选择**：PCA、PLSR、小波、自动峰检等主流特征选择方法
-* **建模算法**：内置定性、定量两大类超15种算法模型
-* **超参数优化**：网格搜索 / 随机搜索 / 遗传算法
-* **可视化评估**：ROC、混淆矩阵、特征重要性、回归残差等分析相关指标、图表
-* **界面模式**：从上到下工作流 + 参数面板，降低上手门槛
+* **多格式导入**：CSV / TXT / Excel，自动标签识别与数据校验（推荐使用 CSV 获取最佳性能）。
+* **预处理**：基线校正、平滑、散射校正、归一化、导数、**峰对齐（Peak Alignment）**、**去峰（Raman Despiking）** 等主流方法。
+* **特征选择**：PCA、PLSR、小波、自动寻峰等常用方法。
+* **建模算法**：内置定性与定量两大类 15+ 算法模型。
+* **超参数优化**：网格搜索 / 随机搜索 / 遗传算法。
+* **可视化评估**：ROC、混淆矩阵、特征重要性、回归残差等图表与指标。
+* **界面与工作流**：自上而下的可视工作流 + 参数面板，降低上手门槛；提供 Windows 独立可执行程序，便于非编程用户。
 
 ---
 
 ## 界面概览
 
-
-
-|             主界面             |                   流程图                   |
-| :-----------------------------: | :---------------------------------------: |
-|![image](<img width="1777" height="1136" alt="image" src="https://github.com/user-attachments/assets/cbfeb28e-5399-4d28-ac9b-56d10c885898" />)|![image](![论文图片_05](https://github.com/user-attachments/assets/a6a7c7ee-86d3-41a5-bd8f-f4ffd64b0c42)
-)|
+|             主界面             |            流程图             |
+| :---------------------------: | :---------------------------: |
+| ![image](https://github.com/user-attachments/assets/cbfeb28e-5399-4d28-ac9b-56d10c885898) | ![image](https://github.com/user-attachments/assets/a6a7c7ee-86d3-41a5-bd8f-f4ffd64b0c42) |
 
 ---
 
@@ -308,22 +306,21 @@ SpectroEase/
 ├── main.py                 # 应用程序入口
 ├── app/                    # 主应用程序
 │   ├── controllers/        # 控制器层
-│   ├── models/            # 数据模型
-│   ├── services/          # 业务逻辑服务
-│   ├── views/             # 用户界面
-│   └── utils/             # 工具函数
-├── plugins/               # 插件模块
-│   ├── data_partitioning/ # 数据分割算法
-│   ├── preprocessing/     # 预处理算法
-│   ├── feature_selection/ # 特征选择方法
-│   ├── modeling/          # 机器学习模型
-│   └── reporting/         # 报告生成
-├── interfaces/            # 接口定义
-├── config/                # 配置文件
-├── examples/              # 示例数据集
-└── translations/          # 多语言支持
+│   ├── models/             # 数据模型
+│   ├── services/           # 业务逻辑服务
+│   ├── views/              # 用户界面
+│   └── utils/              # 工具函数
+├── plugins/                # 插件模块
+│   ├── data_partitioning/  # 数据划分算法
+│   ├── preprocessing/      # 预处理算法
+│   ├── feature_selection/  # 特征选择方法
+│   ├── modeling/           # 机器学习模型
+│   └── reporting/          # 报告生成
+├── interfaces/             # 接口定义
+├── config/                 # 配置文件
+├── examples/               # 示例数据集
+└── translations/           # 多语言支持
 ```
-
 
 ---
 
@@ -331,39 +328,37 @@ SpectroEase/
 
 ### 1 · 数据划分
 
-* Train–Test Split
-* K-Fold Cross-Validation
-* Stratified K-Fold
-* Leave-One-Group-Out (LOGO)
-* Random Split
+* 训练–测试划分（Train–Test Split）
+* K 折交叉验证（K-Fold Cross-Validation）
+* 分层 K 折（Stratified K-Fold）
+* 分组留一（LOGO, Leave-One-Group-Out）
+* 随机划分（Random Split）
 
 ### 2 · 预处理
 
 | 分类          | 算法                                                                           |
-| ----------- | ---------------------------------------------------------------------------- |
-| **去峰处理**    | MAD (中值绝对偏差) · Local Z-score (局部Z分数)                                      |
-| **基线校正**    | Polynomial (多项式) · ALS (非对称最小二乘) · airPLS                               |
+| ------------- | ---------------------------------------------------------------------------- |
+| **去峰处理**    | MAD（中值绝对偏差）· Local Z-score（局部 Z 分数）                            |
+| **基线校正**    | Polynomial（多项式）· ALS（非对称最小二乘）· airPLS                          |
 | **散射校正**    | SNV · MSC · EMSC · RNV · OSC                                                 |
-| **平滑处理**    | Savitzky-Golay · Moving Average · Median Filter · Gaussian · Wavelet         |
-| **缩放与增强**  | Standard Scale · Min-Max Scale · L2 Normalize · Vector · Area · Maximum · First Derivative · Second Derivative · Savitzky-Golay Derivative · Finite Difference · Gap-Segment · Denoising · Peak Alignment · Outlier Detection |
+| **平滑处理**    | Savitzky–Golay · Moving Average · Median Filter · Gaussian · Wavelet         |
+| **缩放与增强**  | Standard Scale · Min–Max Scale · L2 Normalize · Vector · Area · Maximum · First Derivative · Second Derivative · Savitzky–Golay Derivative · Finite Difference · Gap-Segment · **Denoising** · **Peak Alignment** · **Outlier Detection** |
 
 ### 3 · 特征选择
 
 | 分类          | 算法                                                                           |
-| ----------- | ---------------------------------------------------------------------------- |
-| **变换方法**    | PCA (主成分分析) · Wavelet Transform (小波变换)                                  |
-| **模型方法**    | PLSR (偏最小二乘回归)                                                        |
-| **光谱专用**    | Peak Detection (寻峰)                                                        |
+| ------------- | ---------------------------------------------------------------------------- |
+| **变换方法**    | PCA（主成分分析）· Wavelet Transform（小波变换）                               |
+| **模型方法**    | PLSR（偏最小二乘回归）                                                        |
+| **光谱专用**    | Peak Detection（寻峰）                                                        |
 
 ### 4 · 建模
 
-#### 4.1 定性分析 (Classification)
+#### 4.1 定性分析（Classification）
+SVM · 随机森林（RF）· K-近邻（KNN）· 决策树（DT）· 神经网络（NN）· XGBoost · LightGBM
 
-SVM · 随机森林 (RF) · K-近邻 (KNN) · 决策树 (DT) · 神经网络 (NN) · XGBoost · LightGBM
-
-#### 4.2 定量分析 (Regression)
-
-偏最小二乘回归 (PLSR) · 支持向量回归 (SVR) · 随机森林 (RF) · 神经网络 (NN) · 高斯过程回归 (GPR) · XGBoost · LightGBM
+#### 4.2 定量分析（Regression）
+PLSR（偏最小二乘回归）· SVR（支持向量回归）· 随机森林（RF）· 神经网络（NN）· GPR（高斯过程回归）· XGBoost · LightGBM
 
 ### 5 · 超参数优化
 
@@ -374,12 +369,12 @@ Grid Search · Random Search · Genetic Algorithm
 ## 系统需求
 
 | 项目         | 规格                       |
-| ---------- | ------------------------ |
-| **操作系统**   | Windows 10 / 11 (64-bit) |
-| **Python** | ≥ 3.8（推荐 3.11）           |
-| **内存**     | ≥ 4 GB（推荐 8 GB 以上）       |
-| **磁盘空间**   | ≥ 2 GB（推荐 5 GB 以上）       |
-| **GPU**    | 无硬性要求，当前版本仅使用 CPU        |
+| ------------ | -------------------------- |
+| **操作系统** | Windows 10 / 11（64-bit）  |
+| **Python**  | ≥ 3.8（推荐 3.11）         |
+| **内存**     | ≥ 4 GB（推荐 8 GB 以上）   |
+| **磁盘空间** | ≥ 2 GB（推荐 5 GB 以上）   |
+| **GPU**     | 无硬性要求（当前版本仅使用 CPU） |
 
 ---
 
@@ -387,26 +382,26 @@ Grid Search · Random Search · Genetic Algorithm
 
 本平台基于 **Python 3.11.9** 开发，主要依赖如下：
 
-| 库           | 测试版本  | 
-| ------------ | -------- | 
-| PyQt5        | 5.15.7   |
-| NumPy        | 2.3.3    | 
-| pandas       | 2.3.3    | 
-| SciPy        | 1.16.2   | 
-| scikit-learn | 1.7.2    | 
-| Matplotlib   | 3.10.7   | 
-| seaborn      | 0.13.2   | 
-| pyqtgraph    | 0.13.7   | 
-| ReportLab    | 4.4.4    | 
-| OpenPyXL     | 3.1.5    |
-| xlrd         | 2.0.2    | 
-| deap         | 1.4.3    | 
-| requests     | 2.32.5   | 
-| Pillow       | 11.3.0   | 
-| joblib       | 1.5.2    | 
-| threadpoolctl| 3.6.0    | 
+| 库             | 测试版本  |
+| -------------- | -------- |
+| PyQt5          | 5.15.7   |
+| NumPy          | 2.3.3    |
+| pandas         | 2.3.3    |
+| SciPy          | 1.16.2   |
+| scikit-learn   | 1.7.2    |
+| Matplotlib     | 3.10.7   |
+| seaborn        | 0.13.2   |
+| pyqtgraph      | 0.13.7   |
+| ReportLab      | 4.4.4    |
+| OpenPyXL       | 3.1.5    |
+| xlrd           | 2.0.2    |
+| deap           | 1.4.3    |
+| requests       | 2.32.5   |
+| Pillow         | 11.3.0   |
+| joblib         | 1.5.2    |
+| threadpoolctl  | 3.6.0    |
 
-**说明**：上表列出了主要依赖库。其他支持库作为子依赖会自动安装。上述版本均通过兼容性测试；更新版本一般亦可正常运行，但未做长期验证。
+**说明**：上述为主要依赖库。其他支持库（如 contourpy、cycler、fonttools、kiwisolver、pyparsing、urllib3、certifi、idna、charset-normalizer、et-xmlfile、packaging、setuptools、six、python-dateutil、pytz、tzdata）将作为子依赖自动安装。以上版本均通过兼容性测试；较新版本通常也可用，但未做长期验证。
 
 ---
 
@@ -416,11 +411,11 @@ Grid Search · Random Search · Genetic Algorithm
 
 为不熟悉代码的用户提供两种即开即用的软件包。
 
-#### 选项 A：单文件版 (Standalone)
-从 **[Google Drive 备份]([https://drive.google.com/file/d/1BvLx0z0h46n3n_obOIHizyThG2UIJ_rh/view?usp=drive_link](https://drive.google.com/file/d/10EBF0krNCyr6tQDBzn_Psdj1dyasO8Y-/view?usp=drive_link))** 下载 `SpectroEase.exe`。这是一个独立文件，无需安装，可直接运行。
+#### 选项 A：单文件版（Standalone）
+从 **[Google Drive 备份](https://drive.google.com/file/d/10EBF0krNCyr6tQDBzn_Psdj1dyasO8Y-/view?usp=drive_link)** 下载 `SpectroEase.exe`。该版本为独立可执行文件，无需安装，双击即可运行。
 
-#### 选项 B：文件夹版 (Folder)
-从 **[GitHub Release]([https://github.com/shudayi/SpectroEase-V1.0/releases/tag/v1.0.0](https://github.com/shudayi/SpectroEase-V1.0))** 下载 `EXE for SpectroEase`。解压后运行其中的 `SpectroEase.exe`。此版本启动速度可能更快。
+#### 选项 B：文件夹版（Folder）
+从 **[GitHub Release](https://github.com/shudayi/SpectroEase-V1.0)** 下载 `EXE for SpectroEase`。解压后运行 `SpectroEase.exe`。此版本启动速度可能更快。
 
 ### 方式二：为开发者（从源码运行）
 
@@ -441,45 +436,61 @@ python main.py                    # 打开 GUI
 ### 3 · 基础工作流
 
 > **示意视频**  
-> [点击在BiliBili 观看 »](https://www.bilibili.com/video/BV1tuWizxENX/?pop_share=1&vd_source=ee5073c103f10446477719780c85450d)
+> [点击在 BiliBili 观看 »](https://www.bilibili.com/video/BV1tuWizxENX/?pop_share=1&vd_source=ee5073c103f10446477719780c85450d)
 
-**推荐操作顺序**
-1. **导入数据 / 划分**（Train/Test、K-Fold、Stratified K-Fold、LOGO 等）
-2. **预处理配置**（基线校正、平滑、散射校正、归一化、导数、峰对齐、异常值检测）
-3. **特征选择**（PCA / PLSR / 小波 / 寻峰）
-4. **建模 / 超参优化**（SVM、RF、KNN、XGBoost、LightGBM、PLSR、SVR、GPR；Grid / Random / GA）
-5. **评估与可视化**（ROC、混淆矩阵、特征重要性、回归残差等）
-6. **导出报告**（PDF / Excel）
+**推荐操作顺序**  
+1. **数据载入与划分**（Train/Test、K-Fold、Stratified K-Fold、LOGO 等）  
+2. **预处理配置**（基线校正、平滑、散射校正、归一化、**导数**、**峰对齐**、**异常值检测** / Raman **去峰**）  
+3. **特征选择**（PCA / PLSR / 小波 / 寻峰）  
+4. **建模 / 超参优化**（SVM、RF、KNN、XGBoost、LightGBM、PLSR、SVR、GPR；Grid / Random / GA）  
+5. **评估与可视化**（ROC、混淆矩阵、特征重要性、回归残差等）  
+6. **导出报告**（PDF / Excel）  
 
+> 工作流内置输入校验与友好报错，可在文件不完美时继续完成分析。
 
-
+---
 
 ## 数据格式说明
 
-| 维度        | 说明                                          |
-| --------- | ------------------------------------------- |
-| **支持格式**  | CSV · TXT · Excel                           |
-| **推荐布局**  | 行式：`Sample_ID, Label, 400nm, 402nm, …`      |
-| **标签关键字** | category · class · label · variety · target |
-| **示例数据集** | `examples/` (CC-BY-4.0)           |
-
+| 维度        | 说明                                                          |
+| ----------- | ------------------------------------------------------------- |
+| **支持格式**  | CSV · TXT · Excel                                             |
+| **推荐布局**  | 行式：`Sample_ID, Label, 400nm, 402nm, …`                      |
+| **标签关键字** | `category · class · label · variety · target`                  |
+| **示例数据集** | `examples/`（CC-BY-4.0）                                       |
 
 ![image](https://github.com/user-attachments/assets/de2a0556-5729-48fc-b10f-c6efb85da488)
+
+> **提示**：若未能自动识别标签列，系统会弹窗让你手动选择。
+
+---
+
+## 数据校验与错误处理
+
+SpectroEase 内置实用的输入校验与友好报错机制，保障流程不中断：
+
+- **文件格式门控**：导入对话框仅接受 **.csv / .txt / .xlsx**，从源头避免不受支持的文件类型。  
+- **结构一致性检查**：载入时校验表头与列数一致性并提取波长轴；若文件结构异常，弹出**非技术性**提示（指导用户检查文件），而不是直接崩溃。  
+- **标签（Label）交互解析**：系统先按常见关键字自动识别标签列；若失败，将弹窗让用户**手动选择**正确的标签列，确保非标准数据也能继续。  
+- **导入后完整性扫描**：对光谱数据进行数值解析与缺失值检测；采用**保守类型转换**（如仅在多数项为数值时再整列转数值），避免“静默错误”，并在分析前提示数据质量问题。  
+- **安全默认值与连续性**：在 **数据载入与划分 → 预处理 → 特征选择 → 建模（含超参数优化） → 评估** 各阶段提供合理默认项；当设置无效时，界面会解释原因与修复方式，流程可继续推进。  
+
+> 说明：从源码运行时，控制台会输出更详细的诊断信息，以便定位非常见文件布局问题。
 
 ---
 
 ## 性能优化
 
-* 多线程UI，确保界面响应流畅
-* CPU多进程并行，加速密集计算
-* 智能缓存，自动复用相同中间结果
+* 多线程 UI，确保界面响应流畅  
+* CPU 多进程并行，加速密集计算  
+* 智能缓存与共享内存缓冲区，自动复用相同中间结果
 
 ---
 
 ## 许可证与免责声明
 
-* **代码**：MIT License（见 `LICENSE.txt`）
-* **示例数据**：CC-BY-4.0
+* **代码**：MIT License（见 `LICENSE.txt`）  
+* **示例数据**：CC-BY-4.0  
 * **免责声明**：本软件仅供科研与教学使用。作者不对商业用途或模型误判造成的任何损失负责；使用者需遵守当地法律法规。
 
 ---
