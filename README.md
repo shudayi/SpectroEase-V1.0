@@ -442,8 +442,8 @@ python main.py                    # 打开 GUI
 ### 3 · 基础工作流
 
 > **示意视频**  
-> [点击在 Google Drive 观看 »](https://drive.google.com/file/d/1-Q8o-1CNyoxUC4yIulCBptrKXfMi99-s/view?usp=drive_link)
-[![观看演示（SpectroEase 基础工作流）](https://drive.google.com/thumbnail?id=1-Q8o-1CNyoxUC4yIulCBptrKXfMi99-s)](https://drive.google.com/file/d/1-Q8o-1CNyoxUC4yIulCBptrKXfMi99-s/view?usp=drive_link)
+> [点击在BiliBili 观看 »](https://www.bilibili.com/video/BV1tuWizxENX/?pop_share=1&vd_source=ee5073c103f10446477719780c85450d)
+[![观看演示（SpectroEase 基础工作流）](https://www.bilibili.com/video/BV1tuWizxENX/?pop_share=1&vd_source=ee5073c103f10446477719780c85450d)
 
 **推荐操作顺序**
 1. **导入数据 / 划分**（Train/Test、K-Fold、Stratified K-Fold、LOGO 等）
