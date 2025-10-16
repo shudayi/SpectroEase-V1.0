@@ -199,7 +199,7 @@ python main.py                       # start the GUI
 1. **Data loading & partitioning** → 2. **Preprocessinging** → 3. **Feature selection**  
 4. **Modeling & hyper-parameter optimization** → 5. **Evaluation & visualization** → 6. **Reporting**
 
-> **Demo video (≈3 min)**  
+> **Demo video**  
 > [Watch on Google Drive »](https://drive.google.com/file/d/1-Q8o-1CNyoxUC4yIulCBptrKXfMi99-s/view?usp=drive_link)
 
 [![Watch the demo (SpectroEase Workflow)](https://drive.google.com/thumbnail?id=1-Q8o-1CNyoxUC4yIulCBptrKXfMi99-s)](https://drive.google.com/file/d/1-Q8o-1CNyoxUC4yIulCBptrKXfMi99-s/view?usp=drive_link)
