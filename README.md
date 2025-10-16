@@ -273,7 +273,8 @@ Users must comply with local laws and regulations.
 
 |             主界面             |                   流程图                   |
 | :-----------------------------: | :---------------------------------------: |
-|![image](https://github.com/user-attachments/assets/b8639d31-b265-4200-8c27-c935ab65daed)|![image](https://github.com/user-attachments/assets/0e819ef5-3819-43ba-987c-0b36abe8f739)|
+|![image](<img width="1777" height="1136" alt="image" src="https://github.com/user-attachments/assets/cbfeb28e-5399-4d28-ac9b-56d10c885898" />)|![image](![论文图片_05](https://github.com/user-attachments/assets/a6a7c7ee-86d3-41a5-bd8f-f4ffd64b0c42)
+)|
 
 ---
 
@@ -417,9 +418,12 @@ python main.py                    # 打开 GUI
 ### 3 · 基础工作流
 
 1. **导入数据 / 分割**
-  
-  
-  
+
+
+
+**推荐预处理算法
+
+
 2. **选择预处理方法**
   
 
