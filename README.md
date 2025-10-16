@@ -49,9 +49,8 @@
 
 | Main Window | Pipeline |
 | :---------: | :------: |
-| ![Main Window](https://github.com/user-attachments/assets/b927f87a-7561-4a1d-9922-7fb003174e59) | ![Pipeline](https://github.com/user-attachments/assets/c31572c5-4b15-437e-8c2d-6b33fb3bbd40) |
+| <img alt="Main Window" src="https://github.com/user-attachments/assets/b927f87a-7561-4a1d-9922-7fb003174e59" width="520"> | <img alt="Pipeline" src="https://github.com/user-attachments/assets/c31572c5-4b15-437e-8c2d-6b33fb3bbd40" width="520"> |
 
----
 
 ## System Architecture
 
@@ -304,11 +303,12 @@ SpectroEase — Making Spectral Analysis Simple
 
 ---
 
+
 ## 界面概览
 
 | 主界面 | 流程图 |
 | :---: | :---: |
-| ![主界面](https://github.com/user-attachments/assets/b927f87a-7561-4a1d-9922-7fb003174e59) | ![流程图](https://github.com/user-attachments/assets/c31572c5-4b15-437e-8c2d-6b33fb3bbd40) |
+| <img alt="主界面" src="https://github.com/user-attachments/assets/b927f87a-7561-4a1d-9922-7fb003174e59" width="520"> | <img alt="流程图" src="https://github.com/user-attachments/assets/c31572c5-4b15-437e-8c2d-6b33fb3bbd40" width="520"> |
 
 ## 系统架构
 
