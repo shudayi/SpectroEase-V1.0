@@ -61,6 +61,7 @@ SpectroEase/
 │   ├── views/             # User interface
 │   └── utils/             # Utility functions
 ├── plugins/               # Plugin modules
+│   ├── data_partitioning/ # Data partitioning algorithms
 │   ├── preprocessing/     # Preprocessing algorithms
 │   ├── feature_selection/ # Feature selection methods
 │   ├── modeling/          # Machine learning models
@@ -97,21 +98,19 @@ SpectroEase/
 
 | Category                 | Algorithms                                                                   |
 | ------------------------ | ---------------------------------------------------------------------------- |
-| **Statistical Methods**  | SelectKBest · Mutual Information · Information Gain · Correlation Filter · Variance Threshold |
-| **Model-based Methods**  | RFE · Feature Importance · LASSO · PLS Regression                           |
-| **Transform Methods**    | PCA · Wavelet Transform                                                      |
-| **Optimization Methods** | Genetic Algorithm · Spectral Optimized                                      |
+| **Transform Methods**    | PCA (Principal Component Analysis) · Wavelet Transform                       |
+| **Model-based Methods**  | PLSR (Partial Least Squares Regression)                                      |
 | **Spectroscopy-specific**| Peak Detection                                                               |
 
 ### 4 · Modelling
 
-#### 4.1 Classification
+#### 4.1 Classification (Qualitative)
 
-Logistic Regression · SVM · KNN · Decision Tree · Random Forest · Extra Trees · Gradient Boosting · AdaBoost · Neural Network (MLP) · Naive Bayes
+SVM · Random Forest (RF) · K-Nearest Neighbors (KNN) · Decision Tree (DT) · Neural Network (NN) · XGBoost · LightGBM
 
-#### 4.2 Regression
+#### 4.2 Regression (Quantitative)
 
-Linear Regression · Ridge · Lasso · ElasticNet · SVR · KNN Regressor · Decision Tree Regressor · Random Forest Regressor · Extra Trees Regressor · Gradient Boosting Regressor · AdaBoost Regressor · Neural Network (MLP)
+Partial Least Squares Regression (PLSR) · Support Vector Regression (SVR) · Random Forest (RF) · Neural Network (NN) · Gaussian Process Regression (GPR) · XGBoost · LightGBM
 
 ### 5 · Hyper-parameter optimization
 
@@ -138,20 +137,20 @@ The platform is written in **Python 3.11.9** and relies on the following librari
 | Library      | Version tested | Purpose                        |
 | ------------ | -------------- | ------------------------------ |
 | PyQt5        | 5.15.7         | Graphical user interface       |
-| NumPy        | 2.3.2          | Numerical computing            |
-| pandas       | 2.3.1          | Data manipulation              |
-| SciPy        | 1.16.1         | Scientific algorithms          |
-| scikit-learn | 1.7.1          | Machine-learning workflows     |
-| Matplotlib   | 3.10.5         | Visualisation                  |
+| NumPy        | 2.3.3          | Numerical computing            |
+| pandas       | 2.3.3          | Data manipulation              |
+| SciPy        | 1.16.2         | Scientific algorithms          |
+| scikit-learn | 1.7.2          | Machine-learning workflows     |
+| Matplotlib   | 3.10.7         | Visualisation                  |
 | seaborn      | 0.13.2         | Statistical visualization      |
 | pyqtgraph    | 0.13.7         | Interactive plotting           |
-| ReportLab    | 4.4.3          | PDF / report generation        |
+| ReportLab    | 4.4.4          | PDF / report generation        |
 | OpenPyXL     | 3.1.5          | Excel file handling            |
 | xlrd         | 2.0.2          | Excel file reading             |
 | deap         | 1.4.3          | Genetic algorithms             |
 | requests     | 2.32.5         | HTTP library                   |
 | Pillow       | 11.3.0         | Image processing               |
-| joblib       | 1.5.1          | Parallel computing             |
+| joblib       | 1.5.2          | Parallel computing             |
 | threadpoolctl| 3.6.0          | Thread pool control            |
 
 **Note**: The table above lists the main dependencies. Additional supporting libraries (contourpy, cycler, fonttools, kiwisolver, pyparsing, urllib3, certifi, idna, charset-normalizer, et-xmlfile, packaging, setuptools, six, python-dateutil, pytz, tzdata) are automatically installed as sub-dependencies. All versions satisfy SpectroEase's compatibility requirements; newer versions should work but are not actively tested.
@@ -160,11 +159,19 @@ The platform is written in **Python 3.11.9** and relies on the following librari
 
 ## Installation & Quick Start
 
-**⚠️ If the exe file download fails, please try these alternative links:**
-- **[GitHub Release](https://github.com/shudayi/SpectroEase-V1.0/releases/tag/v1.0.0)**
-- **[Google Drive Backup]([[https://drive.google.com/file/d/1AMFtOIimYQIzwiuXrtrno-7OxNDhqzXh/view?usp=drive_link](https://drive.google.com/file/d/1BvLx0z0h46n3n_obOIHizyThG2UIJ_rh/view?usp=drive_link](https://drive.google.com/file/d/10EBF0krNCyr6tQDBzn_Psdj1dyasO8Y-/view?usp=drive_link)))**
+### Option 1: For General Users (Recommended)
 
-### 1 · Clone the Repo & Install Dependencies
+Two pre-built packages are available for users who are not familiar with code.
+
+#### A. Standalone Executable
+Download `SpectroEase.exe` from **[Google Drive](https://drive.google.com/file/d/1BvLx0z0h46n3n_obOIHizyThG2UIJ_rh/view?usp=drive_link)**. This is a single file that can be run directly without installation.
+
+#### B. Folder Version
+Download `SpectroEase_folder.zip` from the **[GitHub Releases](https://github.com/shudayi/SpectroEase-V1.0/releases/tag/v1.0.0)** page. Unzip it and run `SpectroEase_folder.exe`. This version may have a faster startup time.
+
+### Option 2: For Developers (from Source)
+
+#### 1 · Clone the Repo & Install Dependencies
 
 ```powershell
 git clone https://github.com/shudayi/SpectroEase-V1.0
@@ -172,7 +179,7 @@ cd SpectroEase-V1.0
 pip install -r requirements.txt      # exact versions are pinned
 ```
 
-### 2 · Launch the Application
+#### 2 · Launch the Application
 
 ```powershell
 python main.py                       # start the GUI
@@ -181,7 +188,7 @@ python main.py                       # start the GUI
 ### 3 · Typical Workflow
 
 1. **Import / Split** → 2. **Pre-process** → 3. **Select Features**
-2. **Model / Tune** → 5. **Visualise & Evaluate** → 6. **Export Report**
+4. **Model / Tune** → 5. **Visualise & Evaluate** → 6. **Export Report**
 
 ---
 
@@ -192,14 +199,9 @@ python main.py                       # start the GUI
 | **Supported files**    | CSV · TXT · Excel                               |
 | **Recommended layout** | Row-wise: `Sample_ID, Label, 400 nm, 402 nm, …` |
 | **Label keywords**     | `category · class · label · variety · target`   |
-| **Demo dataset**       | `datasets/seed_demo/` (CC-BY-4.0)               |
+| **Demo dataset**       | `examples/` (CC-BY-4.0)               |
 
 ![image](https://github.com/user-attachments/assets/de2a0556-5729-48fc-b10f-c6efb85da488)
-
-
-
-
-
 
 ---
 
@@ -211,15 +213,13 @@ python main.py                       # start the GUI
 
 ---
 
-
-
 ## Licence & Disclaimer
 
 * **Code** — MIT Licence (see `LICENSE.txt`)
 * **Sample data** — CC-BY-4.0
-* **Disclaimer** — This software is provided **for research and educational purposes only**.
-  The authors accept no liability for commercial use or any losses arising from model mis-predictions.
-  Users must comply with local laws and regulations.
+* **Disclaimer** — This software is provided **for research and educational purposes only**.  
+The authors accept no liability for commercial use or any losses arising from model mis-predictions.  
+Users must comply with local laws and regulations.
 
 ---
 
@@ -258,7 +258,7 @@ python main.py                       # start the GUI
 ## 关键特性
 
 * **多格式导入**：CSV / TXT / Excel，自动标签识别与数据校验，使用csv文件效果最佳
-* **高级预处理**：基线校正、平滑、散射校正、归一化、导数、波峰对齐等主流预处理方法
+* **预处理**：基线校正、平滑、散射校正、归一化、导数、波峰对齐等主流预处理方法
 * **特征选择**：PCA、PLSR、小波、自动峰检等主流特征选择方法
 * **建模算法**：内置定性、定量两大类超15种算法模型
 * **超参数优化**：网格搜索 / 随机搜索 / 遗传算法
@@ -271,9 +271,9 @@ python main.py                       # start the GUI
 
 
 
-|               主界面               |                   预处理流程                   |
+|             主界面             |                   流程图                   |
 | :-----------------------------: | :---------------------------------------: |
-| 如英文区 |
+|![image](https://github.com/user-attachments/assets/b8639d31-b265-4200-8c27-c935ab65daed)|![image](https://github.com/user-attachments/assets/0e819ef5-3819-43ba-987c-0b36abe8f739)|
 
 ---
 
@@ -289,6 +289,7 @@ SpectroEase/
 │   ├── views/             # 用户界面
 │   └── utils/             # 工具函数
 ├── plugins/               # 插件模块
+│   ├── data_partitioning/ # 数据分割算法
 │   ├── preprocessing/     # 预处理算法
 │   ├── feature_selection/ # 特征选择方法
 │   ├── modeling/          # 机器学习模型
@@ -326,21 +327,19 @@ SpectroEase/
 
 | 分类          | 算法                                                                           |
 | ----------- | ---------------------------------------------------------------------------- |
-| **统计方法**    | SelectKBest · Mutual Information · Information Gain · Correlation Filter · Variance Threshold |
-| **模型方法**    | RFE · Feature Importance · LASSO · PLS Regression                            |
-| **变换方法**    | PCA · Wavelet Transform                                                       |
-| **优化方法**    | Genetic Algorithm · Spectral Optimized                                       |
-| **光谱专用**    | Peak Detection                                                                |
+| **变换方法**    | PCA (主成分分析) · Wavelet Transform (小波变换)                                  |
+| **模型方法**    | PLSR (偏最小二乘回归)                                                        |
+| **光谱专用**    | Peak Detection (寻峰)                                                        |
 
 ### 4 · 建模
 
-#### 4.1 定性分析（分类）
+#### 4.1 定性分析 (Classification)
 
-Logistic Regression · SVM · KNN · Decision Tree · Random Forest · Extra Trees · Gradient Boosting · AdaBoost · Neural Network (MLP) · Naive Bayes
+SVM · 随机森林 (RF) · K-近邻 (KNN) · 决策树 (DT) · 神经网络 (NN) · XGBoost · LightGBM
 
-#### 4.2 定量分析（回归）
+#### 4.2 定量分析 (Regression)
 
-Linear Regression · Ridge · Lasso · ElasticNet · SVR · KNN Regressor · Decision Tree Regressor · Random Forest Regressor · Extra Trees Regressor · Gradient Boosting Regressor · AdaBoost Regressor · Neural Network (MLP)
+偏最小二乘回归 (PLSR) · 支持向量回归 (SVR) · 随机森林 (RF) · 神经网络 (NN) · 高斯过程回归 (GPR) · XGBoost · LightGBM
 
 ### 5 · 超参数优化
 
@@ -364,56 +363,61 @@ Grid Search · Random Search · Genetic Algorithm
 
 本平台基于 **Python 3.11.9** 开发，主要依赖如下：
 
-| 库            | 测试版本     | 作用                     |
-| ------------ | -------- | ---------------------- |
-| PyQt5        | 5.15.7   | 图形界面                   |
-| NumPy        | 2.3.2    | 数值计算                   |
-| pandas       | 2.3.1    | 数据处理                   |
-| SciPy        | 1.16.1   | 科学计算                   |
-| scikit-learn | 1.7.1    | 机器学习框架                 |
-| Matplotlib   | 3.10.5   | 可视化                    |
-| seaborn      | 0.13.2   | 统计可视化                  |
-| pyqtgraph    | 0.13.7   | 交互式绘图                  |
-| ReportLab    | 4.4.3    | PDF / 报告生成             |
-| OpenPyXL     | 3.1.5    | Excel 文件处理             |
-| xlrd         | 2.0.2    | Excel 文件读取             |
-| deap         | 1.4.3    | 遗传算法                   |
-| requests     | 2.32.5   | HTTP库                  |
-| Pillow       | 11.3.0   | 图像处理                   |
-| joblib       | 1.5.1    | 并行计算                   |
-| threadpoolctl| 3.6.0    | 线程池控制                  |
+| 库           | 测试版本  | 
+| ------------ | -------- | 
+| PyQt5        | 5.15.7   |
+| NumPy        | 2.3.3    | 
+| pandas       | 2.3.3    | 
+| SciPy        | 1.16.2   | 
+| scikit-learn | 1.7.2    | 
+| Matplotlib   | 3.10.7   | 
+| seaborn      | 0.13.2   | 
+| pyqtgraph    | 0.13.7   | 
+| ReportLab    | 4.4.4    | 
+| OpenPyXL     | 3.1.5    |
+| xlrd         | 2.0.2    | 
+| deap         | 1.4.3    | 
+| requests     | 2.32.5   | 
+| Pillow       | 11.3.0   | 
+| joblib       | 1.5.2    | 
+| threadpoolctl| 3.6.0    | 
 
-**说明**：上表列出了主要依赖库。其他支持库（contourpy, cycler, fonttools, kiwisolver, pyparsing, urllib3, certifi, idna, charset-normalizer, et-xmlfile, packaging, setuptools, six, python-dateutil, pytz, tzdata）作为子依赖会自动安装。上述版本均通过兼容性测试；更新版本一般亦可正常运行，但未做长期验证。
+**说明**：上表列出了主要依赖库。其他支持库作为子依赖会自动安装。上述版本均通过兼容性测试；更新版本一般亦可正常运行，但未做长期验证。
 
 ---
 
 ## 安装与快速上手
 
-**⚠️ 如果exe文件下载失败，请尝试使用这些备用链接：**
-- **[GitHub Release](https://github.com/shudayi/SpectroEase-V1.0/releases/tag/v1.0.0)**
-- **[Google Drive 备份](https://drive.google.com/file/d/1AMFtOIimYQIzwiuXrtrno-7OxNDhqzXh/view?usp=drive_link)**
+### 方式一：为普通用户（推荐）
 
-### 1 · 克隆源码并安装依赖
+为不熟悉代码的用户提供两种即开即用的软件包。
+
+#### 选项 A：单文件版 (Standalone)
+从 **[Google Drive 备份](https://drive.google.com/file/d/1BvLx0z0h46n3n_obOIHizyThG2UIJ_rh/view?usp=drive_link)** 下载 `SpectroEase.exe`。这是一个独立文件，无需安装，可直接运行。
+
+#### 选项 B：文件夹版 (Folder)
+从 **[GitHub Release](https://github.com/shudayi/SpectroEase-V1.0/releases/tag/v1.0.0)** 下载 `SpectroEase_folder.zip`。解压后运行其中的 `SpectroEase_folder.exe`。此版本启动速度可能更快。
+
+### 方式二：为开发者（从源码运行）
+
+#### 1 · 克隆源码并安装依赖
 
 ```powershell
 git clone https://github.com/shudayi/SpectroEase-V1.0
-cd SpectroEase
+cd SpectroEase-V1.0
 pip install -r requirements.txt   # 已固定精确版本
 ```
 
-### 2 · 启动应用
+#### 2 · 启动应用
 
 ```powershell
 python main.py                    # 打开 GUI
-# 或运行批处理工作流示例
-python main.py --workflow examples/pca_svm.yml
 ```
 
 ### 3 · 基础工作流
 
 1. **导入数据 / 分割** → 2. **选择预处理方法** → 3. **特征选择**
-2. **建模 / 超参优化** → 5. **评估可视化** → 6. **导出报告**
-| ![image](https://github.com/user-attachments/assets/0e819ef5-3819-43ba-987c-0b36abe8f739)
+4. **建模 / 超参优化** → 5. **评估可视化** → 6. **导出报告**
 ---
 
 ## 数据格式说明
@@ -423,18 +427,18 @@ python main.py --workflow examples/pca_svm.yml
 | **支持格式**  | CSV · TXT · Excel                           |
 | **推荐布局**  | 行式：`Sample_ID, Label, 400nm, 402nm, …`      |
 | **标签关键字** | category · class · label · variety · target |
-| **示例数据集** | `datasets/` (CC-BY-4.0)           |
+| **示例数据集** | `examples/` (CC-BY-4.0)           |
 
 
-![image](https://github.com/user-attachments/assets/7c84d14b-e3d1-478e-a1b0-3117c9c72e4a)
-
+![image](https://github.com/user-attachments/assets/de2a0556-5729-48fc-b10f-c6efb85da488)
 
 ---
 
+## 性能优化
 
-
-
-
+* 多线程UI，确保界面响应流畅
+* CPU多进程并行，加速密集计算
+* 智能缓存，自动复用相同中间结果
 
 ---
 
@@ -447,4 +451,3 @@ python main.py --workflow examples/pca_svm.yml
 ---
 
 **SpectroEase —— 让光谱分析变简单**
-
