@@ -47,11 +47,9 @@
 
 ## UI Overview
 
-|               Main Window               |                Pipeline                |
-| :-------------------------------------: | :------------------------------------: |
-| ![image](<img width="1898" height="1085" alt="da81bcac-c154-41b7-84fa-a3713efd2385" src="https://github.com/user-attachments/assets/b927f87a-7561-4a1d-9922-7fb003174e59" />
-) | ![image](![2](https://github.com/user-attachments/assets/c31572c5-4b15-437e-8c2d-6b33fb3bbd40)
-) |
+| Main Window | Pipeline |
+| :---------: | :------: |
+| ![Main Window](https://github.com/user-attachments/assets/b927f87a-7561-4a1d-9922-7fb003174e59) | ![Pipeline](https://github.com/user-attachments/assets/c31572c5-4b15-437e-8c2d-6b33fb3bbd40) |
 
 ---
 
@@ -308,11 +306,9 @@ SpectroEase — Making Spectral Analysis Simple
 
 ## 界面概览
 
-|             主界面             |            流程图             |
-| :---------------------------: | :---------------------------: |
-| ![image](<img width="1898" height="1085" alt="da81bcac-c154-41b7-84fa-a3713efd2385" src="https://github.com/user-attachments/assets/b927f87a-7561-4a1d-9922-7fb003174e59" />
-) | ![image](![2](https://github.com/user-attachments/assets/c31572c5-4b15-437e-8c2d-6b33fb3bbd40)
-) |
+| 主界面 | 流程图 |
+| :---: | :---: |
+| ![主界面](https://github.com/user-attachments/assets/b927f87a-7561-4a1d-9922-7fb003174e59) | ![流程图](https://github.com/user-attachments/assets/c31572c5-4b15-437e-8c2d-6b33fb3bbd40) |
 
 ## 系统架构
 
