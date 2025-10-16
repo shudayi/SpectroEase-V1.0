@@ -162,7 +162,7 @@ The platform is written in **Python 3.11.9** and relies on the following librari
 
 **⚠️ If the exe file download fails, please try these alternative links:**
 - **[GitHub Release](https://github.com/shudayi/SpectroEase-V1.0/releases/tag/v1.0.0)**
-- **[Google Drive Backup]([https://drive.google.com/file/d/1AMFtOIimYQIzwiuXrtrno-7OxNDhqzXh/view?usp=drive_link](https://drive.google.com/file/d/1BvLx0z0h46n3n_obOIHizyThG2UIJ_rh/view?usp=drive_link))**
+- **[Google Drive Backup]([[https://drive.google.com/file/d/1AMFtOIimYQIzwiuXrtrno-7OxNDhqzXh/view?usp=drive_link](https://drive.google.com/file/d/1BvLx0z0h46n3n_obOIHizyThG2UIJ_rh/view?usp=drive_link](https://drive.google.com/file/d/10EBF0krNCyr6tQDBzn_Psdj1dyasO8Y-/view?usp=drive_link)))**
 
 ### 1 · Clone the Repo & Install Dependencies
 
