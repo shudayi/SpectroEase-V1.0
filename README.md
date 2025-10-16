@@ -1,26 +1,27 @@
 # SpectroEase — A Visual Workflow for Spectral Data Analysis
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.txt) 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE.txt)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/)
 
 > **SpectroEase** is an open-source, extensible desktop application.
-> It converts the entire pipeline—**data loading /partitioning → preprocessing → feature selection → modelling (with hyper-parameter optimization) → evaluation → reporting**—into a drag-and-drop visual workflow, enabling scientists and engineers to perform qualitative or quantitative spectral analysis with zero coding.
+> It converts the entire pipeline—**data loading and partitioning → preprocessing → feature selection → modeling (with hyper-parameter optimization) → evaluation → reporting**—into a drag-and-drop visual workflow, enabling scientists and engineers to perform qualitative or quantitative spectral analysis with zero coding.
 
 ---
 
 <details>
 <summary><strong>Table of Contents</strong> (click to expand)</summary>
 
-1. [Key Features](#key-features)
-2. [UI Overview](#ui-overview)
-3. [System Architecture](#system-architecture)
-4. [Algorithm Catalogue](#algorithm-catalogue)
-5. [System Requirements](#system-requirements)
-6. [Dependencies](#dependencies)
-7. [Installation & Quick Start](#installation--quick-start)
-8. [Data Format](#data-format)
-9. [Performance Notes](#performance-notes)
-10. [Licence & Disclaimer](#licence--disclaimer)
+1. [Key Features](#key-features)  
+2. [UI Overview](#ui-overview)  
+3. [System Architecture](#system-architecture)  
+4. [Algorithm Catalogue](#algorithm-catalogue)  
+5. [System Requirements](#system-requirements)  
+6. [Dependencies](#dependencies)  
+7. [Installation & Quick Start](#installation--quick-start)  
+8. [Typical Workflow](#typical-workflow)  
+9. [Data Format](#data-format)  
+10. [Performance Notes](#performance-notes)  
+11. [License & Disclaimer](#license--disclaimer)
 
 </details>
 
@@ -28,93 +29,99 @@
 
 ## Key Features
 
-**​​Multi-format Data Import**​​​​: CSV (optimal performance) / TXT / Excel formats with automated label recognition and data validation
-**​​​​Advanced Preprocessing**​​​​: Baseline correction, smoothing, scatter correction, normalization, derivative transformation, peak alignment, and other mainstream preprocessing techniques
-**​​​​Feature Selection**​​​​: Principal Component Analysis (PCA), Partial Least Squares Regression (PLSR), wavelet transform, automated peak identification, and established feature selection methodologies
-**​​​​Modeling**​​​​: Native support for >15 qualitative and quantitative chemometric algorithms
-**​​​​Hyper-parameter Optimization**​​​​: Grid search / Random search / Genetic algorithm optimization strategies
-**​​​​Visual Diagnostic Evaluation**​​​​: ROC curves, confusion matrices, feature importance metrics, regression residual analysis with associated quantitative metrics and graphical representations
-**​​​​Workflow Interface Design​​**​​: Hierarchical workflow architecture with parametric control panels to reduce learning thresholds
+- **Module architecture aligned with the paper**: five core modules — **data loading and partitioning**, **preprocessing**, **feature selection**, **modeling**, and **evaluation** — each embedding mainstream algorithmic implementations.
+- **Task detector**: inspects the target variable to automatically initiate the **classification** (qualitative) or **regression** (quantitative) procedure.
+- **Shared in-memory buffer**: passes intermediate results between modules to simplify hand-offs while preserving module independence.
+- **Multi-format data import**: CSV (best performance) / TXT / Excel with automated header/type detection, label recognition, and data validation.
+- **Advanced preprocessing**: baseline correction, smoothing, scatter correction, normalization, **derivative transforms**, **peak alignment**, **despiking (Raman)**, and **outlier detection**.
+- **Feature selection**: PCA, PLSR, wavelet transform, automated peak detection, and established feature-selection methodologies.
+- **Modeling**: parallel suites for **classification** and **regression** with sensible defaults and full parameter control.
+- **Hyper-parameter optimization**: **grid search**, **randomized search**, and **Bayesian optimization (Tree-structured Parzen Estimator, TPE)** with stratified k-fold (default k = 5) and parallel execution.
+- **Evaluation & visualization**: ROC, precision–recall analysis, confusion matrix, feature-importance graphs, regression residuals, and comprehensive metrics.
+- **Reporting & export**: publication-ready **PDF** reports; results exportable as **Excel/CSV**; validated models serializable to **Pickle (.pkl)** or **ONNX (.onnx)** for rapid prototyping and edge deployment.
+- **GUI for non-programmers**: desktop interface built with PyQt5; Windows standalone executable provided; source build available for Python users.
+
 ---
 
 ## UI Overview
 
-
-|             Main Window             | 
-| :---------------------------------: | 
-|![image](https://github.com/user-attachments/assets/b8639d31-b265-4200-8c27-c935ab65daed)
-|            Pipeline                 | 
-| ![image](https://github.com/user-attachments/assets/0e819ef5-3819-43ba-987c-0b36abe8f739)
+|               Main Window               |                Pipeline                |
+| :-------------------------------------: | :------------------------------------: |
+| ![image](https://github.com/user-attachments/assets/b8639d31-b265-4200-8c27-c935ab65daed) | ![image](https://github.com/user-attachments/assets/0e819ef5-3819-43ba-987c-0b36abe8f739) |
 
 ---
 
 ## System Architecture
-
 
 ```text
 SpectroEase/
 ├── main.py                 # Application entry point
 ├── app/                    # Main application
 │   ├── controllers/        # Controller layer
-│   ├── models/            # Data models
-│   ├── services/          # Business logic services
-│   ├── views/             # User interface
-│   └── utils/             # Utility functions
-├── plugins/               # Plugin modules
-│   ├── data_partitioning/ # Data partitioning algorithms
-│   ├── preprocessing/     # Preprocessing algorithms
-│   ├── feature_selection/ # Feature selection methods
-│   ├── modeling/          # Machine learning models
-│   └── reporting/         # Report generation
-├── interfaces/            # Interface definitions
-├── config/                # Configuration files
-├── examples/              # Example datasets
-└── translations/          # Multi-language support
+│   ├── models/             # Data models
+│   ├── services/           # Business logic services
+│   ├── views/              # User interface
+│   └── utils/              # Utility functions
+├── plugins/                # Plugin modules
+│   ├── data_partitioning/  # Data partitioning algorithms
+│   ├── preprocessing/      # Preprocessinging algorithms
+│   ├── feature_selection/  # Feature selection methods
+│   ├── modeling/           # Machine learning models
+│   └── reporting/          # Report generation
+├── interfaces/             # Interface definitions
+├── config/                 # Configuration files
+├── examples/               # Example datasets
+└── translations/           # Multi-language support
 ```
+
+**Implementation and platform**: SpectroEase is implemented in **Python 3.11.9** using scientific libraries (NumPy, pandas, SciPy, scikit-learn, Matplotlib) with a desktop GUI built on **PyQt5**. The current distribution targets **Windows**: a **standalone executable (.exe)** bundles all dependencies for double‑click use, while a source build remains available for Python users.
+
+**Workflow orchestration**: Operators progress systematically through **data loading and partitioning → preprocessing → feature selection → model selection (with hyper‑parameter optimization) → evaluation**. Intermediate results are passed via a **shared in‑memory buffer**. A **task detector** examines the target variable to determine qualitative vs quantitative analysis and triggers the corresponding pipeline. The system can store validated models locally and optionally generate standardized **PDF** reports that document datasets, algorithms, hyper‑parameters, metrics, and figures.
 
 ---
 
 ## Algorithm Catalogue
 
-### 1 · Data Partitioning
+### 1 · Data loading & partitioning
 
-* Train–Test Split
-* K-Fold Cross-Validation
-* Stratified K-Fold
-* Leave-One-Group-Out (LOGO)
-* Random Split
+- File import: CSV, TXT, Excel; auto detection of file type & header layout; numeric parsing with full precision; wavelength‑axis extraction and metadata retention.
+- Robust handling of missing values and mixed types (conservative casting; warnings surfaced in UI).
+- Built‑in **partitioning utilities**: stratified **train–validation–test** splits, K‑Fold, Stratified K‑Fold, LOGO, Random partitioning. Users configure partitioning ratios/folds in the GUI; partitions persist alongside raw data.
 
-### 2 · Pre-processing
+### 2 · Preprocessinging
 
-| Category                 | Algorithms                                                                   |
-| ------------------------ | ---------------------------------------------------------------------------- |
-| **Spike Removal**        | MAD (Median Absolute Deviation) · Local Z-score                             |
-| **Baseline Correction**  | Polynomial · ALS (Asymmetric Least Squares) · airPLS                       |
-| **Scatter Correction**   | SNV · MSC · EMSC · RNV · OSC                                                 |
-| **Smoothing**            | Savitzky–Golay · Moving Average · Median Filter · Gaussian · Wavelet        |
-| **Scaling & Enhancement**| Standard Scale · Min–Max Scale · L2 Normalize · Vector · Area · Maximum · First Derivative · Second Derivative · Savitzky–Golay Derivative · Finite Difference · Gap-Segment · Denoising · Peak Alignment · Outlier Detection |
+| Category                   | Algorithms / Options                                                                 |
+| -------------------------- | ------------------------------------------------------------------------------------ |
+| **Despiking (Raman)**      | Median Absolute Deviation (**MAD**), **local z‑score** with tunable window/threshold |
+| **Baseline Correction**    | Polynomial, **ALS**, **airPLS**                                                      |
+| **Scatter Correction**     | **SNV**, **MSC**, **EMSC**, **RNV**, **OSC**                                         |
+| **Smoothing**              | **Savitzky–Golay**, Moving Average, Median Filter, Gaussian, Wavelet                 |
+| **Scaling & Enhancement**  | Standard Scale, Min–Max Scale, L2 Normalize, Vector, Area, Maximum, **First/Second Derivative**, Savitzky–Golay Derivative, Finite Difference, Gap‑Segment, **Peak Alignment**, **Outlier Detection** |
 
 ### 3 · Feature Selection
 
-| Category                 | Algorithms                                                                   |
-| ------------------------ | ---------------------------------------------------------------------------- |
-| **Transform Methods**    | PCA (Principal Component Analysis) · Wavelet Transform                       |
-| **Model-based Methods**  | PLSR (Partial Least Squares Regression)                                      |
-| **Spectroscopy-specific**| Peak Detection                                                               |
+- **Transform methods**: **PCA**, **Wavelet Transform**
+- **Model‑based**: **PLSR**
+- **Spectroscopy‑specific**: **Peak detection**
 
-### 4 · Modelling
+### 4 · Modeling
 
-#### 4.1 Classification (Qualitative)
+**Classification (qualitative)**: **Logistic Regression**, **SVM** (linear/polynomial/RBF/sigmoid), **KNN**, **Decision Tree**, **Random Forest**, **Gradient Boosting ensembles** (e.g., XGBoost/LightGBM), **MLP neural networks**.  
+**Regression (quantitative)**: **Multiple Linear Regression (MLR)**, **PLSR**, **SVR**, **Decision‑Tree Regressor**, **Random‑Forest Regressor**, **Ridge**, **LASSO**.  
+All estimators expose tunable hyper‑parameters (e.g., regularization strength, kernel type, tree depth, learning‑rate schedule).
 
-SVM · Random Forest (RF) · K-Nearest Neighbors (KNN) · Decision Tree (DT) · Neural Network (NN) · XGBoost · LightGBM
+### 5 · Hyper‑parameter Optimization
 
-#### 4.2 Regression (Quantitative)
+- **Grid search** (exhaustive), **Randomized search** (stochastic), and **Bayesian optimization (TPE)** concentrate evaluations on high‑potential regions.  
+- Shared **stratified k‑fold** backbone (default **k = 5**), parallel execution via `concurrent.futures`, and full trial logging for reproducibility.  
+- The **best configuration** is retrained on the combined **train + validation** set before hand‑off to evaluation.
 
-Partial Least Squares Regression (PLSR) · Support Vector Regression (SVR) · Random Forest (RF) · Neural Network (NN) · Gaussian Process Regression (GPR) · XGBoost · LightGBM
+### 6 · Evaluation
 
-### 5 · Hyper-parameter optimization
-
-Grid Search · Random Search · Genetic Algorithm
+- **Classification**: accuracy, precision, recall, **F1‑score**, **confusion matrix**.  
+- **Regression**: **R²**, **MSE**, **MAE**, and additional regression indicators; optional confidence‑band estimation for deployment.  
+- **Visualization**: **ROC curves**, **precision–recall** analysis, class‑distribution charts, **feature‑importance** graphs, **regression residuals**; all graphics can be embedded automatically in the final **PDF** report.  
+- **Export**: results exportable as **Excel/CSV**; validated models serialized as **Pickle (.pkl)** or **ONNX (.onnx)** for rapid prototyping and edge‑device deployment.
 
 ---
 
@@ -123,10 +130,10 @@ Grid Search · Random Search · Genetic Algorithm
 | Component  | Specification                            |
 | ---------- | ---------------------------------------- |
 | **OS**     | Windows 10 / 11 (64-bit)                 |
-| **Python** | ³ ≥ 3.8 (recommended 3.11)               |
-| **RAM**    | ≥ 4 GB (recommended 8 GB +)              |
-| **Disk**   | ≥ 2 GB free (recommended 5 GB +)         |
-| **GPU**    | Not required—current release is CPU-only |
+| **Python** | ≥ 3.8 (recommended 3.11)                 |
+| **RAM**    | ≥ 4 GB (8 GB+ recommended)               |
+| **Disk**   | ≥ 2 GB free (5 GB+ recommended)          |
+| **GPU**    | Not required — current release is CPU-only |
 
 ---
 
@@ -134,26 +141,26 @@ Grid Search · Random Search · Genetic Algorithm
 
 The platform is written in **Python 3.11.9** and relies on the following libraries:
 
-| Library      | Version tested | Purpose                        |
-| ------------ | -------------- | ------------------------------ |
-| PyQt5        | 5.15.7         | Graphical user interface       |
-| NumPy        | 2.3.3          | Numerical computing            |
-| pandas       | 2.3.3          | Data manipulation              |
-| SciPy        | 1.16.2         | Scientific algorithms          |
-| scikit-learn | 1.7.2          | Machine-learning workflows     |
-| Matplotlib   | 3.10.7         | Visualisation                  |
-| seaborn      | 0.13.2         | Statistical visualization      |
-| pyqtgraph    | 0.13.7         | Interactive plotting           |
-| ReportLab    | 4.4.4          | PDF / report generation        |
-| OpenPyXL     | 3.1.5          | Excel file handling            |
-| xlrd         | 2.0.2          | Excel file reading             |
-| deap         | 1.4.3          | Genetic algorithms             |
-| requests     | 2.32.5         | HTTP library                   |
-| Pillow       | 11.3.0         | Image processing               |
-| joblib       | 1.5.2          | Parallel computing             |
-| threadpoolctl| 3.6.0          | Thread pool control            |
+| Library       | Version tested | Purpose                      |
+| ------------- | -------------- | ---------------------------- |
+| PyQt5         | 5.15.7         | Graphical user interface     |
+| NumPy         | 2.3.3          | Numerical computing          |
+| pandas        | 2.3.3          | Data manipulation            |
+| SciPy         | 1.16.2         | Scientific algorithms        |
+| scikit-learn  | 1.7.2          | Machine-learning workflows   |
+| Matplotlib    | 3.10.7         | Visualization                |
+| seaborn       | 0.13.2         | Statistical visualization    |
+| pyqtgraph     | 0.13.7         | Interactive plotting         |
+| ReportLab     | 4.4.4          | PDF / report generation      |
+| OpenPyXL      | 3.1.5          | Excel file handling          |
+| xlrd          | 2.0.2          | Excel file reading           |
+| deap          | 1.4.3          | Genetic algorithms           |
+| requests      | 2.32.5         | HTTP library                 |
+| Pillow        | 11.3.0         | Image processing             |
+| joblib        | 1.5.2          | Parallel computing           |
+| threadpoolctl | 3.6.0          | Thread pool control          |
 
-**Note**: The table above lists the main dependencies. Additional supporting libraries (contourpy, cycler, fonttools, kiwisolver, pyparsing, urllib3, certifi, idna, charset-normalizer, et-xmlfile, packaging, setuptools, six, python-dateutil, pytz, tzdata) are automatically installed as sub-dependencies. All versions satisfy SpectroEase's compatibility requirements; newer versions should work but are not actively tested.
+**Note**: The table lists the main dependencies. Additional supporting libraries (contourpy, cycler, fonttools, kiwisolver, pyparsing, urllib3, certifi, idna, charset-normalizer, et-xmlfile, packaging, setuptools, six, python-dateutil, pytz, tzdata) are installed automatically as sub-dependencies. All versions satisfy SpectroEase’s compatibility requirements; newer versions should work but are not actively tested.
 
 ---
 
@@ -161,13 +168,13 @@ The platform is written in **Python 3.11.9** and relies on the following librari
 
 ### Option 1: For General Users (Recommended)
 
-Two pre-built packages are available for users who are not familiar with code.
+Two pre-built packages are available for users who prefer not to work with source code.
 
 #### A. Standalone Executable
-Download `SpectroEase.exe` from **[Google Drive](https://drive.google.com/file/d/1BvLx0z0h46n3n_obOIHizyThG2UIJ_rh/view?usp=drive_link)**. This is a single file that can be run directly without installation.
+Download `SpectroEase.exe` from **[Google Drive](https://drive.google.com/file/d/1BvLx0z0h46n3n_obOIHizyThG2UIJ_rh/view?usp=drive_link)**. This single file runs directly with no installation.
 
 #### B. Folder Version
-Download `SpectroEase_folder.zip` from the **[GitHub Releases](https://github.com/shudayi/SpectroEase-V1.0/releases/tag/v1.0.0)** page. Unzip it and run `SpectroEase_folder.exe`. This version may have a faster startup time.
+Download `SpectroEase_folder.zip` from the **[GitHub Releases](https://github.com/shudayi/SpectroEase-V1.0/releases/tag/v1.0.0)** page. Unzip it and run `SpectroEase_folder.exe`. This version may start faster.
 
 ### Option 2: For Developers (from Source)
 
@@ -185,10 +192,27 @@ pip install -r requirements.txt      # exact versions are pinned
 python main.py                       # start the GUI
 ```
 
-### 3 · Typical Workflow
+---
 
-1. **Import / Split** → 2. **Pre-process** → 3. **Select Features**
-4. **Model / Tune** → 5. **Visualise & Evaluate** → 6. **Export Report**
+## Typical Workflow
+
+1. **Data loading & partitioning** → 2. **Preprocessinging** → 3. **Feature selection**  
+4. **Modeling & hyper-parameter optimization** → 5. **Evaluation & visualization** → 6. **Reporting**
+
+> **Demo video (≈3 min)**  
+> [Watch on Google Drive »](https://drive.google.com/file/d/1-Q8o-1CNyoxUC4yIulCBptrKXfMi99-s/view?usp=drive_link)
+
+[![Watch the demo (SpectroEase Workflow)](https://drive.google.com/thumbnail?id=1-Q8o-1CNyoxUC4yIulCBptrKXfMi99-s)](https://drive.google.com/file/d/1-Q8o-1CNyoxUC4yIulCBptrKXfMi99-s/view?usp=drive_link)
+
+**Recommended sequence**
+1. **Data loading & partitioning** (stratified Train/Validation/Test, K‑Fold, Stratified K‑Fold, LOGO, Random)  
+2. **Preprocessinging** (baseline correction, smoothing, scatter correction, normalization, **derivative transforms**, **peak alignment**, **despiking (Raman)**, **outlier detection**)  
+3. **Feature selection** (PCA / PLSR / Wavelet / Peak detection)  
+4. **Model selection & hyper‑parameter optimization** (classification & regression suites; **Grid / Randomized / Bayesian (TPE)**)  
+5. **Evaluation & visualization** (ROC, precision–recall, confusion matrix, feature-importance, regression residuals)  
+6. **Reporting** (**PDF**; results to **Excel/CSV**; models as **.pkl**/**.onnx**)
+
+> *Note:* GitHub READMEs cannot embed Google Drive videos for inline playback. The clickable thumbnail above links to the hosted video.
 
 ---
 
@@ -199,7 +223,7 @@ python main.py                       # start the GUI
 | **Supported files**    | CSV · TXT · Excel                               |
 | **Recommended layout** | Row-wise: `Sample_ID, Label, 400 nm, 402 nm, …` |
 | **Label keywords**     | `category · class · label · variety · target`   |
-| **Demo dataset**       | `examples/` (CC-BY-4.0)               |
+| **Demo dataset**       | `examples/` (CC-BY-4.0)                          |
 
 ![image](https://github.com/user-attachments/assets/de2a0556-5729-48fc-b10f-c6efb85da488)
 
@@ -207,19 +231,19 @@ python main.py                       # start the GUI
 
 ## Performance Notes
 
-* Multi-threaded UI keeps the interface responsive
-* CPU multi-processing for heavy computation
-* Smart cache automatically re-uses identical intermediate results
+- Multi-threaded UI keeps the interface responsive.  
+- CPU multi-processing accelerates heavy computation.  
+- **Shared in‑memory buffer** and smart caching automatically reuse identical intermediate results.
 
 ---
 
-## Licence & Disclaimer
+## License & Disclaimer
 
-* **Code** — MIT Licence (see `LICENSE.txt`)
-* **Sample data** — CC-BY-4.0
-* **Disclaimer** — This software is provided **for research and educational purposes only**.  
-The authors accept no liability for commercial use or any losses arising from model mis-predictions.  
-Users must comply with local laws and regulations.
+- **Code** — MIT License (see `LICENSE.txt`)  
+- **Sample data** — CC-BY-4.0  
+- **Disclaimer** — This software is provided **for research and educational purposes only**.  
+  The authors accept no liability for commercial use or any losses arising from model mispredictions.  
+  Users must comply with local laws and regulations.
 
 ---
 
@@ -417,32 +441,17 @@ python main.py                    # 打开 GUI
 
 ### 3 · 基础工作流
 
-1. **导入数据 / 分割**
+> **示意视频**  
+> [点击在 Google Drive 观看 »](https://drive.google.com/file/d/1-Q8o-1CNyoxUC4yIulCBptrKXfMi99-s/view?usp=drive_link)
+[![观看演示（SpectroEase 基础工作流）](https://drive.google.com/thumbnail?id=1-Q8o-1CNyoxUC4yIulCBptrKXfMi99-s)](https://drive.google.com/file/d/1-Q8o-1CNyoxUC4yIulCBptrKXfMi99-s/view?usp=drive_link)
 
-
-
-**推荐预处理算法
-
-
-2. **选择预处理方法**
-  
-
-
-
-3. **特征选择**
-
-
-
-
-4. **建模 / 超参优化**
-  
-  
-  
-5. **评估可视化**
-
-
-
-6. **导出报告**
+**推荐操作顺序**
+1. **导入数据 / 划分**（Train/Test、K-Fold、Stratified K-Fold、LOGO 等）
+2. **预处理配置**（基线校正、平滑、散射校正、归一化、导数、峰对齐、异常值检测）
+3. **特征选择**（PCA / PLSR / 小波 / 寻峰）
+4. **建模 / 超参优化**（SVM、RF、KNN、XGBoost、LightGBM、PLSR、SVR、GPR；Grid / Random / GA）
+5. **评估与可视化**（ROC、混淆矩阵、特征重要性、回归残差等）
+6. **导出报告**（PDF / Excel）
 
 
 
