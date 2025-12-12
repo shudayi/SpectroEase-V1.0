@@ -41,7 +41,12 @@ Thumbs.db
 /logs/
 /build/
 /build_dist/
+/dist/
 /demo/
 /fixes/
 /optimizations/
 /models/
+*.pkl
+*.txt
+!requirements.txt
+!README.md
