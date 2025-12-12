@@ -1,0 +1,113 @@
+
+QWidget {
+    background-color: #2b2b2b;
+    color: #f0f0f0;
+    font-family: "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+    font-size: 10pt;
+}
+
+QGroupBox {
+    background-color: #3c3c3c;
+    border: 1px solid #555;
+    border-radius: 6px;
+    margin-top: 10px; /* 增加组之间的间距 */
+    padding-top: 20px; /* 为标题留出空间 */
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    subcontrol-position: top left;
+    padding: 2px 8px;
+    background-color: #555;
+    border-radius: 4px;
+    color: #f0f0f0;
+    font-weight: bold;
+}
+
+QPushButton {
+    background-color: #555;
+    color: #f0f0f0;
+    border: 1px solid #666;
+    padding: 5px 15px;
+    border-radius: 4px;
+}
+
+QPushButton:hover {
+    background-color: #666;
+}
+
+QPushButton:pressed {
+    background-color: #444;
+}
+
+/* --- 主要操作按钮 --- */
+QPushButton#LoadDataButton, QPushButton#PartitionDataButton, QPushButton#StartAnalysisButton, QPushButton#GenerateReportButton {
+    background-color: #007ACC; /* 醒目的蓝色 */
+    font-weight: bold;
+}
+
+QPushButton#LoadDataButton:hover, QPushButton#PartitionDataButton:hover, QPushButton#StartAnalysisButton:hover, QPushButton#GenerateReportButton:hover {
+    background-color: #008ae6;
+}
+
+QLineEdit, QComboBox, QSpinBox, QDoubleSpinBox {
+    background-color: #2b2b2b;
+    border: 1px solid #555;
+    border-radius: 4px;
+    padding: 3px;
+}
+
+QComboBox::drop-down {
+    border: none;
+}
+
+QTabWidget::pane {
+    border: 1px solid #555;
+    border-radius: 4px;
+}
+
+QTabBar::tab {
+    background: #3c3c3c;
+    border: 1px solid #555;
+    padding: 6px 12px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+QTabBar::tab:selected {
+    background: #555;
+    border-bottom-color: #555; /* same as the pane color */
+}
+
+QStatusBar {
+    background-color: #3c3c3c;
+    color: #f0f0f0;
+}
+
+/* 为Matplotlib/PyQtGraph的绘图区域占位符 */
+/* 你需要在代码中单独设置绘图库的背景色 */
+#PlotWidget {
+    background-color: #2b2b2b;
+    border: 1px solid #555;
+    border-radius: 4px;
+}
+
+/* --- 菜单栏 --- */
+QMenuBar {
+    background-color: #3c3c3c;
+}
+QMenuBar::item {
+    background-color: transparent;
+    color: #f0f0f0;
+    padding: 4px 8px;
+}
+QMenuBar::item:selected {
+    background-color: #555;
+}
+QMenu {
+    background-color: #3c3c3c;
+    border: 1px solid #555;
+}
+QMenu::item:selected {
+    background-color: #007ACC;
+}
