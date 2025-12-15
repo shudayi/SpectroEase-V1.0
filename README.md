@@ -26,40 +26,10 @@
 
 ---
 
-## 🆕 V1.0
-
-### Professional Spectral-Specific Preprocessing ⭐
-- **Raman-Specific**: Fluorescence background removal (ModPoly, VRA, AFBS) · Raman Shift calibration
-- **MIR/FTIR-Specific**: Atmospheric compensation (CO₂ and H₂O interference removal)
-- **NIR-Specific**: Water peak removal (EPO, DOSC algorithms)  
-- **Enhanced Baseline**: ModPoly and SNIP baseline correction algorithms
-- **Model Transfer**: PDS and SBC for inter-instrument calibration
-- **New UI Organization**: Preprocessing tab organized by spectral type (Universal / Raman / MIR / NIR / Advanced)
-
-### Intelligent Display Adaptation 🎨
-- **Auto DPI Detection**: Automatically adapts to 1080p, 2K, 4K, and Retina displays (150-200 DPI)
-- **Dynamic Font Scaling**: UI fonts adjust based on screen resolution for optimal readability
-- **Multi-Monitor Support**: Seamless experience across different display configurations
-- **Zero Configuration**: Works perfectly out-of-the-box on all modern displays
-
-### AI-Powered Algorithm Conversion 🤖
-- **AI Assistant**: Integrated DeepSeek API support for intelligent algorithm conversion and assistance
-- **Code Conversion**: Automatically convert existing algorithm code into SpectroEase-compatible plugins
-- **Smart Context**: Algorithm-specific context understanding for preprocessing, feature selection, modeling, and data partitioning
-- **Zero-Code Integration**: Transform Python scripts into drag-and-drop workflow components
-
-### Custom Algorithm Support 🔧
-- **Extensible Architecture**: Add your own preprocessing, feature selection, modeling, and data partitioning algorithms
-- **Algorithm Cache**: Save and manage custom algorithms for reuse across projects
-- **Plugin System**: Seamless integration with built-in algorithms through unified interface
-- **Custom Tab**: Dedicated UI tab for managing user-defined preprocessing algorithms
-
----
-
 ## Key Features
 
 **​​Multi-format Data Import**​​​​: CSV (optimal performance) / TXT / Excel formats with automated label recognition, data validation, and interactive data quality assessment (NaN/Inf detection and handling)
-**​​​​Advanced Preprocessing**​​​​: Baseline correction, smoothing, scatter correction, normalization, derivative transformation, peak alignment, and spectral-specific algorithms (Raman/MIR/NIR)
+**​​​​Advanced Preprocessing**​​​​: Baseline correction (Polynomial, ALS, airPLS, ModPoly, SNIP), smoothing, scatter correction (SNV, MSC, EMSC, RNV, OSC), normalization, derivative transformation, peak alignment, and spectral-specific algorithms (Raman: fluorescence removal ModPoly/VRA/AFBS, Raman Shift calibration; MIR/FTIR: atmospheric compensation CO₂/H₂O removal; NIR: water peak removal EPO/DOSC; Model Transfer: PDS, SBC)
 **​​​​Feature Selection**​​​​: Principal Component Analysis (PCA), Partial Least Squares Regression (PLSR), wavelength selection (CARS, SPA), wavelet transform, automated peak identification, and established feature selection methodologies
 **​​​​Modeling**​​​​: Native support for >20 qualitative and quantitative chemometric algorithms with model save/load functionality (pickle format)
 **​​​​Hyper-parameter Optimization**​​​​: Grid search / Random search / Genetic algorithm optimization strategies
@@ -69,7 +39,8 @@
 **​​​​Professional Report Generation**​​​​: Comprehensive PDF reports with data quality assessment, preprocessing effects, feature selection analysis, and publication-quality figures
 **​​​​AI-Powered Algorithm Conversion**​​​​: Integrated AI Assistant (DeepSeek API) for converting existing code into SpectroEase-compatible algorithms
 **​​​​Custom Algorithm Support**​​​​: Extensible plugin system allowing users to add their own algorithms for preprocessing, feature selection, modeling, and data partitioning
-**​​​​Workflow Interface Design​​**​​: Hierarchical workflow architecture with parametric control panels to reduce learning thresholds
+**​​​​Workflow Interface Design​​**​​: Hierarchical workflow architecture with parametric control panels to reduce learning thresholds; preprocessing tab organized by spectral type (Universal / Raman / MIR / NIR / Advanced) for intuitive algorithm selection
+**​​​​Intelligent Display Adaptation**​​​​: Auto DPI detection (1080p, 2K, 4K, Retina 150-200 DPI), dynamic font scaling, multi-monitor support, zero configuration for all modern displays
 ---
 
 ## UI Overview
@@ -195,7 +166,7 @@ Grid Search · Random Search · Genetic Algorithm
 | Component  | Specification                            |
 | ---------- | ---------------------------------------- |
 | **OS**     | Windows 10 / 11 (64-bit)                 |
-| **Python** | ³ ≥ 3.8 (recommended 3.11)               |
+| **Python** | ≥ 3.8 (recommended 3.11)               |
 | **RAM**    | ≥ 4 GB (recommended 8 GB +)              |
 | **Disk**   | ≥ 2 GB free (recommended 5 GB +)         |
 | **GPU**    | Not required—current release is CPU-only |
@@ -238,7 +209,7 @@ The platform is written in **Python 3.11.9** and relies on the following librari
 ### 1 · Clone the Repo & Install Dependencies
 
 ```powershell
-git clone [https://github.com/shudayi/SpectroEase-V1.0]
+git clone https://github.com/shudayi/SpectroEase-V1.0
 cd SpectroEase
 pip install -r requirements.txt      # exact versions are pinned
 ```
@@ -352,7 +323,7 @@ The AI Assistant feature requires a DeepSeek API key:
 ## 关键特性
 
 * **多格式导入**：CSV / TXT / Excel，自动标签识别与数据校验，交互式数据质量评估（NaN/Inf检测与处理），使用csv文件效果最佳
-* **高级预处理**：基线校正、平滑、散射校正、归一化、导数、波峰对齐等主流预处理方法，以及Raman/MIR/NIR专用算法
+* **高级预处理**：基线校正（Polynomial、ALS、airPLS、ModPoly、SNIP）、平滑、散射校正（SNV、MSC、EMSC、RNV、OSC）、归一化、导数、波峰对齐等主流预处理方法，以及Raman专用（荧光去除ModPoly/VRA/AFBS、拉曼位移校准）、MIR/FTIR专用（大气补偿CO₂/H₂O去除）、NIR专用（水峰去除EPO/DOSC）、模型转移（PDS、SBC）等光谱特定算法
 * **特征选择**：PCA、PLSR、波长选择（CARS、SPA）、小波、自动峰检等主流特征选择方法
 * **建模算法**：内置定性、定量两大类超20种算法模型，支持模型保存/加载（pickle格式）
 * **超参数优化**：网格搜索 / 随机搜索 / 遗传算法
@@ -362,7 +333,8 @@ The AI Assistant feature requires a DeepSeek API key:
 * **专业报告生成**：包含数据质量评估、预处理效果、特征选择分析及发表级图表的完整PDF报告
 * **AI算法转换**：集成AI助手（DeepSeek API），可将现有代码转换为SpectroEase兼容算法
 * **自定义算法支持**：可扩展插件系统，支持用户添加自定义预处理、特征选择、建模和数据划分算法
-* **界面模式**：从上到下工作流 + 参数面板，降低上手门槛
+* **界面模式**：从上到下工作流 + 参数面板，降低上手门槛；预处理标签页按光谱类型组织（通用 / Raman / MIR / NIR / 高级），便于直观选择算法
+* **智能显示适配**：自动DPI检测（1080p、2K、4K、Retina 150-200 DPI），动态字体缩放，多显示器支持，所有现代显示器零配置开箱即用
 
 ---
 
@@ -479,36 +451,6 @@ Grid Search · Random Search · Genetic Algorithm
 - **预处理对比**：原始vs处理后光谱对比，Y轴锁定，增强可视化对话框
 - **PCA探索器**：碎石图、累积方差、得分和载荷图，用于探索性分析
 - **光谱图**：交互式光谱数据可视化，支持波长选择
-
----
-
-## 🆕 V1.2.1 新功能（最新更新）
-
-### 专业光谱特定预处理 ⭐
-- **Raman专用**：荧光背景去除 (ModPoly, VRA, AFBS) · 拉曼位移校准
-- **MIR/FTIR专用**：大气补偿 (CO₂和H₂O干扰去除)
-- **NIR专用**：水峰去除 (EPO, DOSC算法)
-- **增强基线校正**：ModPoly和SNIP基线校正算法
-- **模型转移**：PDS和SBC用于仪器间校准
-- **新UI组织**：预处理标签页按光谱类型组织（通用 / Raman / MIR / NIR / 高级）
-
-### 智能显示适配 🎨
-- **自动DPI检测**：自动适配1080p、2K、4K和Retina显示器（150-200 DPI）
-- **动态字体缩放**：UI字体根据屏幕分辨率调整，确保最佳可读性
-- **多显示器支持**：在不同显示配置间无缝体验
-- **零配置**：在所有现代显示器上开箱即用
-
-### AI驱动的算法转换 🤖
-- **AI助手**：集成DeepSeek API支持，用于智能算法转换和辅助
-- **代码转换**：自动将现有算法代码转换为SpectroEase兼容插件
-- **智能上下文**：针对预处理、特征选择、建模和数据划分的算法特定上下文理解
-- **零代码集成**：将Python脚本转换为拖放式工作流组件
-
-### 自定义算法支持 🔧
-- **可扩展架构**：添加您自己的预处理、特征选择、建模和数据划分算法
-- **算法缓存**：保存和管理自定义算法，在项目间重复使用
-- **插件系统**：通过统一接口与内置算法无缝集成
-- **自定义标签页**：用于管理用户定义预处理算法的专用UI标签页
 
 ---
 
