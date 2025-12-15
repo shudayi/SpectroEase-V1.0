@@ -26,7 +26,7 @@
 
 ---
 
-## 🆕 V1.2.1 New Features (Latest Update)
+## 🆕 V1.0
 
 ### Professional Spectral-Specific Preprocessing ⭐
 - **Raman-Specific**: Fluorescence background removal (ModPoly, VRA, AFBS) · Raman Shift calibration
